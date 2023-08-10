@@ -1,15 +1,21 @@
-
 import "./App.css";
-import NavBar from "./components/NavBar";
-import Home from "./components/Home";
+import Home from "./components/Home.jsx";
+import Navbar from "./components/NavBar.jsx";
+import Posts from "./components/Posts.jsx";
+import Login from "./components/Login.jsx";
+import Profile from "./components/Profile.jsx";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
     <>
-      <Home />
-      <h1>Stranger's Things</h1>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/posts" element={<Posts />} />
+        <Route path="/account/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
     </>
   );
 }
-
-export default App;
