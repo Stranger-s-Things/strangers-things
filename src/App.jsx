@@ -1,11 +1,13 @@
-import { useState } from "react";
 
 import "./App.css";
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
 
 function App() {
   return (
     <>
-      <p>{`Stranger's Things`}</p>
+      <Home />
+      <h1>Stranger's Things</h1>
     </>
   );
 }
