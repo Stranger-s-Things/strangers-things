@@ -15,7 +15,7 @@ header {
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  background-color: #e9ecef;
+  background-color: #ced4da;
   padding: 1em;
 }
 
@@ -25,4 +25,10 @@ header nav {
   justify-content: space-evenly;
   gap: 1em;
   font-size: 1.3em;
+}
+
+.post-cont {
+  background-color: #e9ecef;
+  margin: 1em 2em;
+  padding: 1em;
 }
