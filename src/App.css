@@ -1,16 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
-
-.card {
-  padding: 2em;
+header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e9ecef;
+  padding: 1em;
 }
 
-.read-the-docs {
-  color: #888;
+header nav {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  gap: 1em;
+  font-size: 1.3em;
 }
-
