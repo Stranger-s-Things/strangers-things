@@ -1,25 +1,38 @@
 import { useState } from "react";
 import { fetchLogin } from "../API/index.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiFillEye } from "react-icons/ai";
 
-export default function Login({ inputType, onSetInputType }) {
+export default function Login({
+  inputType,
+  onSetInputType,
+  onSetActiveUser,
+  onSetUserToken,
+}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setError(null);
+    setSuccessMessage(null);
     const user = await fetchLogin(username, password);
     if (!user.success) {
       setError(user.error);
     }
     if (user.success) {
-      setSuccessMessage(user.message);
+      onSetUserToken(user.data.token);
+      setSuccessMessage(user.data.message);
+      setUsername("");
+      setPassword("");
       // navigate(`/profile`);
+      setTimeout(() => {
+        navigate("/profile");
+      }, 5000);
     }
   }
 
@@ -57,7 +70,9 @@ export default function Login({ inputType, onSetInputType }) {
         <Link to="/account/register">Sign up today!</Link>
       </h4>
       {error && <h3>{error.message}</h3>}
-      {successMessage && <h3>{successMessage}</h3>}
+      {successMessage && (
+        <h3>{successMessage} You are being redirected to your profile now.</h3>
+      )}
     </div>
   );
 }
