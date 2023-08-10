@@ -11,12 +11,13 @@ import { Routes, Route } from "react-router-dom";
 export default function App() {
   const [inputType, setInputType] = useState("password");
   const [userToken, setUserToken] = useState(null);
+  const [activeUsername, setActiveUsername] = useState("");
 
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home activeUsername={activeUsername} />} />
         <Route path="/posts" element={<Posts />} />
         <Route
           path="/account/login"
@@ -34,7 +35,15 @@ export default function App() {
             <Register inputType={inputType} onSetInputType={setInputType} />
           }
         />
-        <Route path="/profile" element={<Profile userToken={userToken} />} />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              userToken={userToken}
+              onSetActiveUsername={setActiveUsername}
+            />
+          }
+        />
       </Routes>
     </>
   );
