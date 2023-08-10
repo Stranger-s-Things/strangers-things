@@ -28,7 +28,8 @@ export default function Posts() {
               <h3>{post.title}</h3>
               <p>{post.description}</p>
               <p>
-                <b>{post.price}</b>
+                Price:
+                <b> {post.price}</b>
               </p>
               <p>
                 {post.willDeliver
