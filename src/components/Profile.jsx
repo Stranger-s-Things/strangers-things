@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchLoggedIn } from "../API/index.js";
 
-export default function Profile({ userToken }) {
+export default function Profile({ userToken, onSetActiveUsername }) {
   const [activeUser, setActiveUser] = useState(null);
   const navigate = useNavigate();
   if (!userToken) navigate("/account/login");
@@ -18,11 +18,16 @@ export default function Profile({ userToken }) {
       }
     }
     fetchProfile();
-  }, [userToken]);
+    onSetActiveUsername(activeUser?.data.username);
+  }, [activeUser?.data.username, onSetActiveUsername, userToken]);
   return (
     <>
-      <h1>Welcome {activeUser.username}</h1>
-      <p></p>
+      <h1>Welcome {activeUser?.data.username}</h1>
+      {activeUser?.data.messages.length === 0 ? (
+        <p>No messages sent</p>
+      ) : (
+        <p>Messages you sent: </p>
+      )}
     </>
   );
 }
