@@ -17,14 +17,14 @@ export default function Posts() {
     }
     PostsFetch();
   }, []);
-  console.log(posts);
+  // console.log(posts);
   return (
     <section>
       {err && <p>{err}</p>}
       {posts &&
         posts.map((post) => {
           return (
-            <div key={post._id}>
+            <div key={post._id} className="post-cont">
               <h3>{post.title}</h3>
               <p>{post.description}</p>
               <p>
