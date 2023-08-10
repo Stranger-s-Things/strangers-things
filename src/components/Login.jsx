@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { fetchLogin } from "../API/index.js";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { AiOutlineEye, AiFillEye } from "react-icons/ai";
 
-export default function Login() {
+export default function Login({ inputType, onSetInputType }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -17,8 +18,8 @@ export default function Login() {
       setError(user.error);
     }
     if (user.success) {
-      setSuccessMessage(user.success);
-      navigate(`/profile`);
+      setSuccessMessage(user.message);
+      // navigate(`/profile`);
     }
   }
 
@@ -38,17 +39,25 @@ export default function Login() {
         <label>
           Password:
           <input
-            type="text"
+            type={inputType}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          {inputType === "password" ? (
+            <AiOutlineEye onClick={() => onSetInputType("text")} />
+          ) : (
+            <AiFillEye onClick={() => onSetInputType("password")} />
+          )}
         </label>
-        <button>Log in</button>
+        <button>Sign in</button>
       </form>
-
+      <h4>
+        Don&apos;t have an account?{" "}
+        <Link to="/account/register">Sign up today!</Link>
+      </h4>
       {error && <h3>{error.message}</h3>}
-      {successMessage && <h3>{successMessage.message}</h3>}
+      {successMessage && <h3>{successMessage}</h3>}
     </div>
   );
 }
