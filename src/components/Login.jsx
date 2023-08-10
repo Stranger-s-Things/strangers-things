@@ -3,12 +3,7 @@ import { fetchLogin } from "../API/index.js";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiFillEye } from "react-icons/ai";
 
-export default function Login({
-  inputType,
-  onSetInputType,
-  onSetActiveUser,
-  onSetUserToken,
-}) {
+export default function Login({ inputType, onSetInputType, onSetUserToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
