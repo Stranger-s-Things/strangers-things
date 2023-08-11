@@ -1,6 +1,19 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: "Playfair Display", serif;
+  font-family: "Ultra", serif;
+}
+
+.home-page {
+  background: linear-gradient(0deg, #e4ccaa38, #e4ccaa38),
+    url("https://images.unsplash.com/photo-1561065465-0928c7ee69cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
+  background-size: cover;
+}
+
+#main-cont {
+  height: 100vh;
+  background-color: #cfc6b5;
 }
 
 #root {
@@ -10,13 +23,20 @@
   text-align: center;
 }
 
+/* Navbar.jsx */
+
 header {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  background-color: #ced4da;
-  padding: 1em;
+  /* background-color: #796f5b; */
+  padding: 1em 1.5em;
+}
+
+header h1 {
+  color: #817151;
+  font-size: 2.3em;
 }
 
 header nav {
@@ -24,11 +44,102 @@ header nav {
   flex-flow: row wrap;
   justify-content: space-evenly;
   gap: 1em;
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
+
+.nav-link:link,
+.nav-link:visited {
+  text-decoration: none;
+  color: #817151;
+}
+
+.nav-link:hover,
+.nav-link:active {
+  transition: all 0.4s;
+  color: #b6aa91;
+}
+
+/* post.jsx */
 
 .post-cont {
   background-color: #e9ecef;
   margin: 1em 2em;
   padding: 1em;
+}
+
+/* home.jsx */
+
+#home-cont {
+  padding-top: 4em;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+#home-cont h1 {
+  font-size: 5em;
+  margin-bottom: 0.5em;
+  color: #977e4d;
+}
+
+#home-cont h2 {
+  font-size: 4em;
+  margin-bottom: 1em;
+  color: #aa9c7e;
+}
+
+#home-cont h3 {
+  font-size: 1.4em;
+  color: #938b7d;
+}
+
+#home-cont div {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 1em;
+  align-items: center;
+}
+
+#home-cont button {
+  font-size: 1.1em;
+  background: none;
+  border: none;
+  color: #b6aa91;
+}
+
+#home-cont button:hover {
+  transition: all 0.4s;
+  color: #977e4d;
+  cursor: pointer;
+}
+
+/* Footer.jsx */
+#footer {
+  background-color: #615b4e;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em 2em 4em 2em;
+  color: #b1a288;
+}
+
+#footer h3 {
+  font-size: 1.8em;
+  color: #b7a484;
+}
+
+#footer h5 {
+  font-size: 1em;
+}
+
+.icon {
+  font-size: 2em;
+  color: #dbd4c8;
+}
+
+.icon:hover {
+  transition: all 0.3s;
+  cursor: pointer;
+  color: #977e4d;
 }
