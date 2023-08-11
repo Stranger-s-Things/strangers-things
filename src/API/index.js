@@ -81,3 +81,37 @@ export async function fetchNewUser(username, password) {
     console.error(err);
   }
 }
+
+// Posting a new post
+export async function fetchNewPost(
+  userToken,
+  title,
+  description,
+  price,
+  location,
+  willDeliver
+) {
+  try {
+    const response = await fetch(POSTS_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+      body: JSON.stringify({
+        post: {
+          title: `${title}`,
+          description: `${description}`,
+          price: `${price}`,
+          location: `${location}`,
+          willDeliver: `${willDeliver}`,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
