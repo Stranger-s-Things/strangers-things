@@ -36,6 +36,7 @@ export default function Register({ inputType, onSetInputType }) {
         <div>
           <label>
             Password:
+            {/* Your register form should have a place to enter a username, a place to enter a password, and a place to enter password confirmation. */}
             <input
               type={inputType}
               value={password}
