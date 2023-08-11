@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { fetchPosts } from "../API/index.js";
 
-export default function Posts() {
+export default function Posts({ userToken }) {
   const [posts, setPosts] = useState([]);
   const [err, setErr] = useState(null);
 
@@ -17,10 +18,18 @@ export default function Posts() {
     }
     PostsFetch();
   }, []);
-  // console.log(posts);
+  console.log(posts, "user token: ", userToken);
   return (
     <div id="posts-page-cont">
-      <h1>{posts.length < 1 ? "No Current Listings" : "Current Listings"}</h1>
+      <div id="posts-page-heading">
+        <h1>{posts.length < 1 ? "No Current Listings" : "Current Listings"}</h1>
+        <h3>
+          <Link to="/posts/add" className="nav-link nav-new-post">
+            Add New Listing
+          </Link>
+        </h3>
+      </div>
+
       <section id="posts">
         {err && <p>{err}</p>}
 
