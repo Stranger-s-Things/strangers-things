@@ -5,6 +5,7 @@ import Login from "./components/Login.jsx";
 import Profile from "./components/Profile.jsx";
 import Register from "./components/Register.jsx";
 import Footer from "./components/Footer.jsx";
+import PostForm from "./components/PostForm.jsx";
 
 import "./App.css";
 
@@ -33,7 +34,11 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home activeUsername={activeUsername} />} />
-          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts" element={<Posts userToken={userToken} />} />
+          <Route
+            path="/posts/add"
+            element={<PostForm userToken={userToken} />}
+          />
           <Route
             path="/account/login"
             element={
