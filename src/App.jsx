@@ -15,6 +15,7 @@ export default function App() {
   const [inputType, setInputType] = useState("password");
   const [userToken, setUserToken] = useState(null);
   const [activeUsername, setActiveUsername] = useState("");
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const location = useLocation();
 
@@ -26,6 +27,11 @@ export default function App() {
       document.getElementById("main-cont").classList.remove("home-page");
     }
   }, [location.pathname]);
+useEffect(() => {
+  console.log('isLoggedIn: ', isLoggedIn)
+}, 
+[isLoggedIn]
+)
 
   return (
     <section>
@@ -41,6 +47,7 @@ export default function App() {
                 inputType={inputType}
                 onSetInputType={setInputType}
                 onSetUserToken={setUserToken}
+                onSetLoggedIn={setLoggedIn}
               />
             }
           />
