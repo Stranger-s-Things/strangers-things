@@ -24,10 +24,9 @@ export default function Login({ inputType, onSetInputType, onSetUserToken }) {
       setSuccessMessage(user.data.message);
       setUsername("");
       setPassword("");
-      // navigate(`/profile`);
       setTimeout(() => {
         navigate("/profile");
-      }, 5000);
+      }, 3000);
     }
   }
 
@@ -77,7 +76,9 @@ export default function Login({ inputType, onSetInputType, onSetUserToken }) {
       </h4>
       {error && <h4>{error.message}</h4>}
       {successMessage && (
-        <h4>{successMessage} You are being redirected to your profile now.</h4>
+        <h4 id="success">
+          {successMessage} You are being redirected to your profile now.
+        </h4>
       )}
     </div>
   );
