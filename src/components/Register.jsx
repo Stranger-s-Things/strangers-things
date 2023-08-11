@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchNewUser } from "../API/index.js";
-import { AiOutlineEye, AiFillEye } from "react-icons/ai";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 export default function Register({ inputType, onSetInputType }) {
   const [username, setUsername] = useState("");
@@ -20,41 +20,50 @@ export default function Register({ inputType, onSetInputType }) {
   }
 
   return (
-    <div>
+    <div className="form-cont">
       <h1>Register Now!</h1>
-      <form method="POST" onSubmit={handleSubmit}>
-        <label>
-          Username:
+      <form method="POST" onSubmit={handleSubmit} className="form">
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+
+        <div className="password-cont">
+          {/* Your register form should have a place to enter a username, a place to enter a password, and a place to enter password confirmation. */}
           <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            className="password-input"
+            type={inputType}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
+          {inputType === "password" ? (
+            <IoEyeOutline
+              onClick={() => onSetInputType("text")}
+              className="icon"
+            />
+          ) : (
+            <IoEyeOffOutline
+              onClick={() => onSetInputType("password")}
+              className="icon"
+            />
+          )}
+        </div>
 
         <div>
-          <label>
-            Password:
-            {/* Your register form should have a place to enter a username, a place to enter a password, and a place to enter password confirmation. */}
-            <input
-              type={inputType}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            {inputType === "password" ? (
-              <AiOutlineEye onClick={() => onSetInputType("text")} />
-            ) : (
-              <AiFillEye onClick={() => onSetInputType("password")} />
-            )}
-          </label>
+          <button>Create Account</button>
         </div>
-        <button>Register</button>
       </form>
       {!successfulSignup ? (
         <h4>
-          Already have an account? <Link to="/account/login">Log in</Link>
+          Already have an account?{" "}
+          <Link to="/account/login" className="form-link">
+            Log in
+          </Link>
         </h4>
       ) : (
         ""
@@ -62,7 +71,10 @@ export default function Register({ inputType, onSetInputType }) {
       {error && <h4>Oops! Something went wrong: {error}</h4>}
       {successfulSignup && (
         <h4>
-          {successfulSignup} <Link to="/account/login">Log in</Link>
+          {successfulSignup}{" "}
+          <Link to="/account/login" className="form-link">
+            Log in
+          </Link>
         </h4>
       )}
     </div>
