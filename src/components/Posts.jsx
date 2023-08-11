@@ -19,43 +19,48 @@ export default function Posts() {
   }, []);
   // console.log(posts);
   return (
-    <section id="posts">
-      {err && <p>{err}</p>}
+    <div id="posts-page-cont">
+      <h1>{posts.length < 1 ? "No Current Listings" : "Current Listings"}</h1>
+      <section id="posts">
+        {err && <p>{err}</p>}
 
-      {posts &&
-        posts.map((post) => {
-          return (
-            <div key={post._id} className="post-cont">
-              <h3>{post.title}</h3>
-              <ul>
-                <li className="post-description">
-                  <p>{post.description}</p>
-                </li>
-                <li className="post-price">
-                  <p>Price:</p>
-                  <b className="post-li-second-item"> {post.price}</b>
-                </li>
+        {posts &&
+          posts.map((post) => {
+            return (
+              <div key={post._id} className="post-cont">
+                <h3>{post.title}</h3>
+                <ul>
+                  <li className="post-description">
+                    <p>{post.description}</p>
+                  </li>
+                  <li className="post-price">
+                    <p>Price:</p>
+                    <b className="post-li-second-item"> {post.price}</b>
+                  </li>
 
-                <li className="post-seller">
-                  <p>Seller: </p>{" "}
-                  <p className="post-li-second-item">{post.author.username}</p>
-                </li>
-                <li className="post-location">
-                  {" "}
-                  <p>Location: </p>
-                  <p className="post-li-second-item">{post.location}</p>
-                </li>
-                <li className="post-delivery">
-                  <p>
-                    {post.willDeliver
-                      ? "Can be delivered"
-                      : "You have to come pick it up"}
-                  </p>
-                </li>
-              </ul>
-            </div>
-          );
-        })}
-    </section>
+                  <li className="post-seller">
+                    <p>Seller: </p>{" "}
+                    <p className="post-li-second-item">
+                      {post.author.username}
+                    </p>
+                  </li>
+                  <li className="post-location">
+                    {" "}
+                    <p>Location: </p>
+                    <p className="post-li-second-item">{post.location}</p>
+                  </li>
+                  <li className="post-delivery">
+                    <p>
+                      {post.willDeliver
+                        ? "Can be delivered"
+                        : "You have to come pick it up"}
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            );
+          })}
+      </section>
+    </div>
   );
 }
