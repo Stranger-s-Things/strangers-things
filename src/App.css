@@ -43,7 +43,7 @@ header nav {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
-  gap: 1em;
+  gap: 1.6em;
   font-size: 1.5em;
 }
 
@@ -104,14 +104,118 @@ header nav {
   font-size: 1.1em;
   background: none;
   border: none;
-  color: #b6aa91;
+  color: #977e4d;
 }
 
 #home-cont button:hover {
   transition: all 0.4s;
-  color: #977e4d;
+  color: #b6aa91;
   cursor: pointer;
 }
+
+/* Forms (login and register) */
+
+.form-cont {
+  background-color: #b1a288;
+  width: 50%;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  margin: 5em auto;
+  padding: 2em 0 5em 0;
+  border-radius: 2em;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+.form-cont h1 {
+  font-size: 5em;
+  color: #5b4d30;
+}
+
+.form-cont h4 {
+  font-size: 1.3em;
+  color: #806e50;
+}
+
+.form-link:link,
+.form-link:visited {
+  color: #63563d;
+  text-decoration: none;
+}
+
+.form-link:hover,
+.form-link:active {
+  color: #806e50;
+}
+
+.form {
+  padding: 2em;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 1em;
+  justify-content: center;
+  align-items: start;
+}
+
+.form input {
+  margin-left: 0.3em;
+  padding: 0.4em;
+  background: none;
+  border: none;
+  background-color: #cfc6b5;
+  border-radius: 0.3em;
+  color: #84745b;
+  font-size: 2em;
+}
+
+.form input:focus {
+  outline: none;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+}
+
+.form input::placeholder {
+  color: #847967;
+}
+
+.form div {
+  margin: auto;
+}
+
+.form button {
+  font-size: 2em;
+  background: none;
+  border: none;
+  color: #7b684a;
+}
+
+.form button:hover {
+  transition: all 0.4s;
+  cursor: pointer;
+  color: #5b4d30;
+}
+
+.password-cont {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.password-input {
+  margin-right: 1em;
+}
+
+/* login.jsx */
+.login-cont {
+}
+/* register.jsx */
 
 /* Footer.jsx */
 #footer {
