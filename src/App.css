@@ -12,7 +12,7 @@
 }
 
 #main-cont {
-  height: 100vh;
+  min-height: 100vh;
   background-color: #cfc6b5;
 }
 
@@ -22,8 +22,9 @@
   /* padding: 2rem; */
   text-align: center;
 }
+/* ******************************************** */
 
-/* Navbar.jsx */
+/* NavBar.jsx */
 
 header {
   display: flex;
@@ -58,16 +59,18 @@ header nav {
   transition: all 0.4s;
   color: #b6aa91;
 }
+/* *************************************** */
 
-/* post.jsx */
+/* Posts.jsx */
 
 .post-cont {
   background-color: #e9ecef;
   margin: 1em 2em;
   padding: 1em;
 }
+/* ******************************************** */
 
-/* home.jsx */
+/* Home.jsx */
 
 #home-cont {
   padding-top: 4em;
@@ -112,6 +115,7 @@ header nav {
   color: #b6aa91;
   cursor: pointer;
 }
+/* ******************************************** */
 
 /* Forms (login and register) */
 
@@ -189,6 +193,7 @@ header nav {
 }
 
 .form button {
+  margin-top: 1em;
   font-size: 2em;
   background: none;
   border: none;
@@ -212,10 +217,10 @@ header nav {
   margin-right: 1em;
 }
 
-/* login.jsx */
-.login-cont {
+#success {
+  padding: 1em 4em 0 4em;
 }
-/* register.jsx */
+/* ******************************************** */
 
 /* Footer.jsx */
 #footer {
