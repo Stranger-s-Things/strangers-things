@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { fetchLogin } from "../API/index.js";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineEye, AiFillEye } from "react-icons/ai";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 export default function Login({ inputType, onSetInputType, onSetUserToken }) {
   const [username, setUsername] = useState("");
@@ -32,41 +32,52 @@ export default function Login({ inputType, onSetInputType, onSetUserToken }) {
   }
 
   return (
-    <div>
+    <div className="login-cont form-cont">
       <h1>Login</h1>
-      <form method="POST" onSubmit={handleSubmit}>
-        <label>
-          Username:
+      <form method="POST" onSubmit={handleSubmit} className="form">
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <div className="password-cont">
           <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password:
-          <input
+            className="password-input"
             type={inputType}
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           {inputType === "password" ? (
-            <AiOutlineEye onClick={() => onSetInputType("text")} />
+            <IoEyeOutline
+              onClick={() => onSetInputType("text")}
+              className="icon"
+            />
           ) : (
-            <AiFillEye onClick={() => onSetInputType("password")} />
+            <IoEyeOffOutline
+              onClick={() => onSetInputType("password")}
+              className="icon"
+            />
           )}
-        </label>
-        <button>Sign in</button>
+        </div>
+
+        <div>
+          <button>Sign in</button>
+        </div>
       </form>
       <h4>
         Don&apos;t have an account?{" "}
-        <Link to="/account/register">Sign up today!</Link>
+        <Link to="/account/register" className="form-link">
+          Sign up today!
+        </Link>
       </h4>
-      {error && <h3>{error.message}</h3>}
+      {error && <h4>{error.message}</h4>}
       {successMessage && (
-        <h3>{successMessage} You are being redirected to your profile now.</h3>
+        <h4>{successMessage} You are being redirected to your profile now.</h4>
       )}
     </div>
   );
