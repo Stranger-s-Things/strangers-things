@@ -109,10 +109,21 @@ header nav {
 /* ******************************************** */
 
 /* Posts.jsx */
-#posts-page-cont h1 {
-  padding: 0.4em 0.65em;
+#posts-page-heading {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4em 2em;
+}
+
+#posts-page-heading h1 {
   font-size: 3.2em;
   color: #584a2e;
+}
+
+.nav-new-post {
+  font-size: 1.6em;
 }
 
 #posts {
@@ -275,6 +286,59 @@ header nav {
 
 #success {
   padding: 1em 4em 0 4em;
+  text-align: center;
+}
+/* ******************************************** */
+
+/* PostForm.jsx */
+
+.form label {
+  margin-left: 0.3em;
+  padding: 0.4em;
+  color: #84745b;
+  font-size: 2em;
+}
+
+#checkbox-label {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2em;
+  align-items: center;
+}
+
+.form input[type="checkbox"] {
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #b1a288;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+.form input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+.form input[type="checkbox"]:checked::before {
+  transform: scale(1);
+  background-color: #cfc6b5;
+}
+
+#post-form-btn {
+  font-size: 3em;
 }
 /* ******************************************** */
 
