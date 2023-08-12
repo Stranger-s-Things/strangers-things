@@ -11,10 +11,10 @@ export default function Profile({ userToken, onSetActiveUsername }) {
     async function fetchProfile() {
       try {
         const data = await fetchLoggedIn(userToken);
-        console.log(data);
+        // console.log(data);
         return setActiveUser(data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
     fetchProfile();

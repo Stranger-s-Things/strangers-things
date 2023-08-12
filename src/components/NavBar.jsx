@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   RiHome2Fill,
@@ -7,9 +7,24 @@ import {
   RiMenuLine,
   RiCloseLine,
 } from "react-icons/ri";
+import { fetchLoggedIn } from "../API/index.js";
 
-export default function NavBar() {
+export default function NavBar({ userToken, onSetActiveUsername }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeUser, setActiveUser] = useState(null);
+
+  useEffect(() => {
+    async function fetchProfile() {
+      try {
+        const data = await fetchLoggedIn(userToken);
+        console.log(data);
+        return setActiveUser(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchProfile();
+  }, [onSetActiveUsername, userToken]);
 
   function handleCloseMenu() {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -50,6 +65,17 @@ export default function NavBar() {
 
             <p className="nav-link-text">Login</p>
           </Link>
+          {activeUser?.success && (
+            <Link
+              to="/profile"
+              className="nav-link"
+              onClick={() => handleCloseMenu()}
+            >
+              <RiUser3Fill className="nav-link-icon" />
+
+              <p className="nav-link-text">Profile</p>
+            </Link>
+          )}
         </nav>
       </div>
       {mobileMenuOpen === true ? (

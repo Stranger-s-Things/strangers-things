@@ -31,7 +31,7 @@ export default function App() {
   return (
     <section>
       <div id="main-cont">
-        <Navbar />
+        <Navbar userToken={userToken} onSetActiveUsername={setActiveUsername} />
         <Routes>
           <Route path="/" element={<Home activeUsername={activeUsername} />} />
           <Route path="/posts" element={<Posts userToken={userToken} />} />
