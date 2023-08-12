@@ -16,6 +16,12 @@ export default function App() {
   const [inputType, setInputType] = useState("password");
   const [userToken, setUserToken] = useState(null);
   const [activeUsername, setActiveUsername] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Session Storage Data
+  const sessionUserToken = sessionStorage.getItem("userToken");
+  const sessionLoggedIn = sessionStorage.getItem("isLoggedIn");
+  const sessionActiveUsername = sessionStorage.getItem("activeUsername");
 
   const location = useLocation();
 
@@ -28,16 +34,48 @@ export default function App() {
     }
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (isLoggedIn === false && sessionLoggedIn === false) setUserToken(null);
+    setActiveUsername("");
+  }, [isLoggedIn, sessionLoggedIn]);
+
   return (
     <section>
       <div id="main-cont">
-        <Navbar activeUsername={activeUsername} />
+        <Navbar
+          isLoggedIn={isLoggedIn}
+          sessionLoggedIn={sessionLoggedIn}
+          onSetIsLoggedIn={setIsLoggedIn}
+        />
         <Routes>
-          <Route path="/" element={<Home activeUsername={activeUsername} />} />
-          <Route path="/posts" element={<Posts userToken={userToken} />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                activeUsername={activeUsername}
+                sessionActiveUsername={sessionActiveUsername}
+                isLoggedIn={isLoggedIn}
+                sessionLoggedIn={sessionLoggedIn}
+              />
+            }
+          />
+          <Route
+            path="/posts"
+            element={
+              <Posts
+                userToken={userToken}
+                sessionUserToken={sessionUserToken}
+              />
+            }
+          />
           <Route
             path="/posts/add"
-            element={<PostForm userToken={userToken} />}
+            element={
+              <PostForm
+                userToken={userToken}
+                sessionUserToken={sessionUserToken}
+              />
+            }
           />
           <Route
             path="/account/login"
@@ -46,6 +84,7 @@ export default function App() {
                 inputType={inputType}
                 onSetInputType={setInputType}
                 onSetUserToken={setUserToken}
+                onSetIsLoggedIn={setIsLoggedIn}
               />
             }
           />
@@ -60,6 +99,7 @@ export default function App() {
             element={
               <Profile
                 userToken={userToken}
+                sessionUserToken={sessionUserToken}
                 onSetActiveUsername={setActiveUsername}
               />
             }
