@@ -205,6 +205,23 @@ header nav {
   color: #7d7058;
   margin-bottom: 0.8em;
 }
+
+.post-link {
+  margin-top: 0.5em;
+  font-size: 1.3em;
+}
+
+.post-link:link,
+.post-link:visited {
+  text-decoration: none;
+  color: #825c15;
+}
+
+.post-link:hover,
+.post-link:active {
+  transition: all 0.4s;
+  color: #937a4d;
+}
 /* ******************************************** */
 
 /* Forms (login and register) */
