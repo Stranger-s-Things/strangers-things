@@ -6,6 +6,7 @@ import Profile from "./components/Profile.jsx";
 import Register from "./components/Register.jsx";
 import Footer from "./components/Footer.jsx";
 import PostForm from "./components/PostForm.jsx";
+import ViewPost from "./components/ViewPost.jsx";
 
 import "./App.css";
 
@@ -68,6 +69,7 @@ export default function App() {
               />
             }
           />
+          <Route path="/posts/:postId" element={<ViewPost />} />
           <Route
             path="/posts/add"
             element={
