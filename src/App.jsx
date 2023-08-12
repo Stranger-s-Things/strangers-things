@@ -77,6 +77,7 @@ export default function App() {
               <PostForm
                 userToken={userToken}
                 sessionUserToken={sessionUserToken}
+                sessionLoggedIn={sessionLoggedIn}
               />
             }
           />
@@ -103,6 +104,7 @@ export default function App() {
               <Profile
                 userToken={userToken}
                 sessionUserToken={sessionUserToken}
+                sessionLoggedIn={sessionLoggedIn}
                 onSetActiveUsername={setActiveUsername}
               />
             }
