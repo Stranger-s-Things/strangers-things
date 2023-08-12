@@ -29,7 +29,7 @@ export default function Home({
               : navigate("/account/login");
           }}
         >
-          {activeUsername !== "" || sessionActiveUsername !== "none"
+          {isLoggedIn === true || sessionLoggedIn === "true"
             ? "VIEW PROFILE"
             : "LOG IN"}
         </button>

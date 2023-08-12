@@ -60,7 +60,7 @@ export default function NavBar({
             <p className="nav-link-text">Posts</p>
           </Link>
 
-          {sessionLoggedIn === "false" && isLoggedIn === false ? (
+          {sessionLoggedIn !== "true" ? (
             <Link
               to="/account/login"
               className="nav-link"
