@@ -197,6 +197,10 @@ header nav {
   color: #685432;
 }
 
+.post-location {
+  margin-bottom: 1.3em;
+}
+
 .post-li-second-item {
   color: #86590b;
 }
@@ -221,6 +225,10 @@ header nav {
 .post-link:active {
   transition: all 0.4s;
   color: #937a4d;
+}
+
+.post-link-icon {
+  display: none;
 }
 /* ******************************************** */
 
@@ -498,7 +506,6 @@ header nav {
     padding: 1.3em 2.6em;
     width: 41%;
     gap: 1em;
-    justify-content: start;
   }
 
   .post-cont ul li {
@@ -594,6 +601,20 @@ header nav {
   header nav {
     gap: 1.6em;
     font-size: 1.3em;
+  }
+
+  /* Posts.jsx */
+  #posts-page-heading h1 {
+    font-size: 2.6em;
+  }
+
+  .nav-new-post {
+    font-size: 1.2em;
+  }
+
+  .post-cont {
+    width: 38%;
+    margin: 0.7em 0;
   }
 }
 
@@ -707,6 +728,34 @@ header nav {
     font-size: 2em;
   }
 
+  /* Posts.jsx */
+  #posts-page-heading h1 {
+    font-size: 2.3em;
+  }
+
+  .nav-new-post {
+    font-size: 1em;
+  }
+
+  .post-cont {
+    width: 40%;
+    margin: 0.7em 0;
+    padding: 1.3em 1.8em;
+  }
+
+  .post-cont h3 {
+    font-size: 1.3em;
+  }
+
+  .post-cont p,
+  .post-cont b {
+    font-size: 1em;
+  }
+
+  .post-link {
+    font-size: 1.1em;
+  }
+
   /* Footer.jsx */
   #footer {
     gap: 1em;
@@ -730,7 +779,7 @@ header nav {
 @media screen and (max-width: 740px) {
   /* Navbar.jsx */
   header {
-    padding: 1em 1.9em;
+    padding: 1em 1.2em;
   }
 
   header h1 {
@@ -757,6 +806,25 @@ header nav {
   }
   #home-cont button {
     padding-top: 0;
+  }
+
+  /* Posts.jsx */
+  #posts-page-heading {
+    padding: 1.2em;
+  }
+
+  #posts-page-heading h1 {
+    font-size: 1.8em;
+  }
+
+  .nav-new-post {
+    font-size: 0.9em;
+  }
+
+  .post-cont {
+    width: 88%;
+    margin: 0.4em 0;
+    padding: 1.2em 1.6em;
   }
 
   /* Forms (login and register) */
@@ -939,6 +1007,46 @@ header nav {
   #home-cont button {
     font-size: 0.6em;
   }
+
+  /* Posts.jsx */
+  #posts-page-heading {
+    padding: 1.2em;
+  }
+
+  #posts-page-heading h1 {
+    font-size: 1.5em;
+  }
+
+  .nav-new-post {
+    font-size: 0.7em;
+  }
+
+  .post-cont {
+    width: 88%;
+    margin: 0.4em 0;
+    padding: 1.2em;
+  }
+
+  .post-cont h3 {
+    font-size: 1.1em;
+  }
+
+  .post-cont p,
+  .post-cont b {
+    font-size: 0.8em;
+  }
+
+  .post-link {
+    font-size: 1em;
+  }
+
+  .post-link-icon {
+    display: block;
+    font-size: 2em;
+  }
+  .post-link-text {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 510px) {
@@ -982,6 +1090,10 @@ header nav {
 
 @media screen and (max-width: 450px) {
   /* Navbar.jsx */
+  header {
+    padding: 1em 0.8em;
+  }
+
   header h1 {
     font-size: 1.2em;
   }
@@ -1001,6 +1113,39 @@ header nav {
 
   #home-cont div {
     margin-top: 0.5em;
+  }
+
+  /* Posts.jsx */
+  #posts-page-heading {
+    padding: 0.9em;
+  }
+
+  #posts-page-heading h1 {
+    font-size: 1.4em;
+  }
+
+  .post-cont {
+    width: 86%;
+    margin: 0.4em 0;
+    padding: 1em;
+  }
+
+  .post-cont h3 {
+    font-size: 0.9em;
+  }
+
+  .post-cont ul li {
+    gap: 0.3em;
+  }
+
+  .post-cont p,
+  .post-cont b {
+    font-size: 0.7em;
+  }
+
+  .post-link-icon {
+    display: block;
+    font-size: 1.8em;
   }
 
   /* Forms (login and register) */
@@ -1214,6 +1359,10 @@ header nav {
 
 @media screen and (max-width: 302px) {
   /* Navbar.jsx */
+  header {
+    padding: 1em 0.6em;
+  }
+
   header h1 {
     font-size: 1em;
   }
@@ -1237,6 +1386,34 @@ header nav {
 
   #home-cont div {
     margin-top: 0;
+  }
+
+  /* Posts.jsx */
+  #posts-page-heading {
+    padding: 0.6em;
+  }
+
+  #posts-page-heading h1 {
+    font-size: 1.2em;
+  }
+
+  .post-cont {
+    width: 85%;
+    margin: 0.3em 0;
+    padding: 0.8em;
+  }
+
+  .post-cont h3 {
+    font-size: 0.8em;
+  }
+
+  .post-cont p,
+  .post-cont b {
+    font-size: 0.6em;
+  }
+
+  .post-link-icon {
+    font-size: 1.7em;
   }
 
   /* Forms (login and register) */
