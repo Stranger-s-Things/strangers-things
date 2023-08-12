@@ -9,7 +9,7 @@ import {
 } from "react-icons/ri";
 import { fetchLoggedIn } from "../API/index.js";
 
-export default function NavBar({ userToken, onSetActiveUsername }) {
+export default function NavBar({ userToken }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeUser, setActiveUser] = useState(null);
 
@@ -24,7 +24,7 @@ export default function NavBar({ userToken, onSetActiveUsername }) {
       }
     }
     fetchProfile();
-  }, [onSetActiveUsername, userToken]);
+  }, [userToken]);
 
   function handleCloseMenu() {
     setMobileMenuOpen(!mobileMenuOpen);
