@@ -18,7 +18,7 @@ export default function NavBar({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (isLoggedIn === true && sessionLoggedIn === true) return;
+    if (isLoggedIn === true || sessionLoggedIn === "true") return;
   }, [isLoggedIn, sessionLoggedIn]);
 
   function handleCloseMenu() {

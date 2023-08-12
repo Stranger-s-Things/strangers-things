@@ -14,7 +14,7 @@ export default function Home({
       <h1>Welcome to Stranger&apos;s Things</h1>
       <h2>Anything. Anywhere.</h2>
       <div>
-        {isLoggedIn === true || sessionLoggedIn === "true" ? (
+        {sessionLoggedIn === "true" && sessionActiveUsername !== "none" ? (
           <h3>
             Logged in as{" "}
             {activeUsername ? activeUsername : sessionActiveUsername}
@@ -24,14 +24,12 @@ export default function Home({
         )}
         <button
           onClick={() => {
-            activeUsername !== "" || sessionActiveUsername !== "none"
+            sessionLoggedIn === "true"
               ? navigate("/profile")
               : navigate("/account/login");
           }}
         >
-          {isLoggedIn === true || sessionLoggedIn === "true"
-            ? "VIEW PROFILE"
-            : "LOG IN"}
+          {sessionLoggedIn === "true" ? "VIEW PROFILE" : "LOG IN"}
         </button>
       </div>
     </div>

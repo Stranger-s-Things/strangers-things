@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchPosts } from "../API/index.js";
+import { RiDraftFill } from "react-icons/ri";
 
 export default function Posts({ userToken, sessionUserToken }) {
   const [posts, setPosts] = useState([]);
@@ -32,7 +33,8 @@ export default function Posts({ userToken, sessionUserToken }) {
         <h1>{posts.length < 1 ? "No Current Listings" : "Current Listings"}</h1>
         <h3>
           <Link to="/posts/add" className="nav-link nav-new-post">
-            Add New Listing
+            <RiDraftFill className="post-link-icon" />
+            <p className="post-link-text">Add New Listing</p>
           </Link>
         </h3>
       </div>
@@ -44,53 +46,56 @@ export default function Posts({ userToken, sessionUserToken }) {
           posts.map((post) => {
             return (
               <div key={post._id} className="post-cont">
-                <h3>{post.title}</h3>
-                <ul>
-                  <li className="post-description">
-                    <p>{post.description}</p>
-                  </li>
-                  <li className="post-price">
-                    <p>Price:</p>
-                    <b className="post-li-second-item"> {post.price}</b>
-                  </li>
+                <div>
+                  <h3>{post.title}</h3>
+                  <ul>
+                    <li className="post-description">
+                      <p>{post.description}</p>
+                    </li>
+                    <li className="post-price">
+                      <p>Price:</p>
+                      <b className="post-li-second-item"> {post.price}</b>
+                    </li>
 
-                  <li className="post-seller">
-                    <p>Seller: </p>{" "}
-                    <p className="post-li-second-item">
-                      {post.author.username}
-                    </p>
-                  </li>
-                  <li className="post-location">
-                    {" "}
-                    <p>Location: </p>
-                    <p className="post-li-second-item">{post.location}</p>
-                  </li>
-                  <li className="post-delivery">
-                    <p>
-                      {post.willDeliver
-                        ? "Can be delivered"
-                        : "You have to come pick it up"}
-                    </p>
-                  </li>
+                    <li className="post-seller">
+                      <p>Seller: </p>{" "}
+                      <p className="post-li-second-item">
+                        {post.author.username}
+                      </p>
+                    </li>
+                    <li className="post-location">
+                      {" "}
+                      <p>Location: </p>
+                      <p className="post-li-second-item">{post.location}</p>
+                    </li>
+                    <li className="post-delivery">
+                      <p>
+                        {post.willDeliver
+                          ? "Can be delivered"
+                          : "You have to come pick it up"}
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="post-link-cont">
                   {post.isAuthor === true && (
-                    <>
-                      <li>
-                        {/* Route to ViewPost.jsx to build out the individual post view */}
-                        <Link className="post-link" to={`/posts/${post._id}`}>
-                          View Listing
-                        </Link>
-                      </li>
-                    </>
+                    <p>
+                      {/* Route to ViewPost.jsx to build out the individual post view */}
+                      <Link className="post-link" to={`/posts/${post._id}`}>
+                        View Listing
+                      </Link>
+                    </p>
                   )}
                   {post.isAuthor === false && (
-                    <li>
+                    <p>
                       {/* Route to ViewPost.jsx to build out the individual post view for messaging the poster*/}
                       <Link className="post-link" to={`/posts/${post._id}`}>
                         Message
                       </Link>
-                    </li>
+                    </p>
                   )}
-                </ul>
+                </div>
               </div>
             );
           })}
