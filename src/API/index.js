@@ -6,16 +6,27 @@ const LOGGEDIN_API_URL = `${API_URL}/users/me`;
 const REGISTER_API_URL = `${API_URL}/users/register`;
 
 // Fetch all posts: unauthenticated
-export async function fetchPosts() {
+export async function fetchPosts(token) {
   try {
-    const response = await fetch(POSTS_API_URL);
-    const data = await response.json();
-    return data.data.posts;
+    if (token) {
+      const response = await fetch(POSTS_API_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      return data.data.posts;
+    } else {
+      const response = await fetch(POSTS_API_URL);
+      const data = await response.json();
+      return data.data.posts;
+    }
   } catch (error) {
     console.log("Trouble fetching posts: ", error);
   }
 }
-
 fetchPosts();
 
 // Fetch login, authenticating a user if their username and password mathes the right data
