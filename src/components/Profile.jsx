@@ -6,17 +6,18 @@ export default function Profile({
   userToken,
   onSetActiveUsername,
   sessionUserToken,
+  sessionLoggedIn,
 }) {
   const [activeUser, setActiveUser] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
-    if (sessionUserToken === "null") navigate("/account/login");
-  }, [navigate, sessionUserToken]);
+    if (sessionUserToken === "null" || sessionLoggedIn !== "true")
+      navigate("/account/login");
+  }, [navigate, sessionLoggedIn, sessionUserToken]);
 
   useEffect(() => {
     async function fetchProfile() {
       try {
-
         const data = await fetchLoggedIn(
           userToken ? userToken : sessionUserToken
         );
