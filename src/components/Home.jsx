@@ -14,7 +14,7 @@ export default function Home({
       <h1>Welcome to Stranger&apos;s Things</h1>
       <h2>Anything. Anywhere.</h2>
       <div>
-        {isLoggedIn === true || sessionLoggedIn === true ? (
+        {isLoggedIn === true || sessionLoggedIn === "true" ? (
           <h3>
             Logged in as{" "}
             {activeUsername ? activeUsername : sessionActiveUsername}
