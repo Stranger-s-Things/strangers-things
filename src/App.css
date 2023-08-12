@@ -443,6 +443,19 @@ header nav {
   }
 }
 
+@media screen and (max-width: 1700px) {
+  /* Forms (login and register) */
+
+  .form-cont {
+    width: 70%;
+  }
+
+  #success {
+    padding: 1em 4em 0 4em;
+    text-align: center;
+  }
+}
+
 /* Laptop screens between 1024px and 1440px */
 
 @media screen and (max-width: 1300px) {
@@ -525,6 +538,44 @@ header nav {
 
   #home-cont button {
     font-size: 0.9em;
+  }
+
+  /* Forms (login and register) */
+
+  .form-cont {
+    width: 85%;
+    gap: 0;
+    margin: 3em auto;
+    padding: 2em 0 5em 0;
+  }
+
+  .form-cont h1 {
+    font-size: 4em;
+  }
+
+  .form-cont h4 {
+    font-size: 1em;
+  }
+
+  .form {
+    padding: 2em;
+    gap: 1.4em;
+  }
+
+  .form input {
+    margin-left: 0.6em;
+    padding: 0.4em;
+    font-size: 1.8em;
+  }
+
+  .form button {
+    margin-top: 0.6em;
+    font-size: 1.8em;
+  }
+
+  #success {
+    padding: 1em 4em 0 4em;
+    text-align: center;
   }
 
   /* Footer.jsx */
@@ -626,6 +677,30 @@ header nav {
     padding-top: 0;
   }
 
+  /* Forms (login and register) */
+
+  .form-cont {
+    margin: 2em auto;
+  }
+
+  .form-cont h1 {
+    font-size: 3em;
+  }
+
+  .form-cont h4 {
+    font-size: 0.8em;
+  }
+
+  .form input {
+    padding: 0.3em;
+    font-size: 1.4em;
+  }
+
+  .form button {
+    margin-top: 0.6em;
+    font-size: 1.6em;
+  }
+
   /* Footer.jsx */
   #footer {
     gap: 1em;
@@ -722,6 +797,27 @@ header nav {
 
   .icon {
     font-size: 1.6em;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  /* Forms (login and register) */
+  .form-cont h1 {
+    font-size: 2.4em;
+  }
+
+  .form-cont h4 {
+    font-size: 0.8em;
+  }
+
+  .form input {
+    padding: 0.3em;
+    font-size: 1em;
+  }
+
+  .form button {
+    margin-top: 0.4em;
+    font-size: 1.3em;
   }
 }
 
@@ -824,6 +920,45 @@ header nav {
   #home-cont div {
     margin-top: 0.5em;
   }
+
+  /* Forms (login and register) */
+  .form-cont {
+    margin: 1em auto;
+    padding: 2em 0 3em 0;
+    width: 93%;
+  }
+
+  .form-cont h1 {
+    font-size: 2.3em;
+  }
+
+  .form-cont h4 {
+    font-size: 0.7em;
+  }
+
+  .form {
+    padding: 1.2em;
+    gap: 0.8em;
+  }
+
+  .form input {
+    padding: 0.35em;
+    font-size: 1em;
+  }
+
+  .form button {
+    margin-top: 0.4em;
+    font-size: 1.4em;
+  }
+
+  .password-cont .icon {
+    font-size: 1.2em;
+  }
+
+  .login-cont h4 {
+    padding: 0 1.4em;
+    text-align: center;
+  }
 }
 
 /* Phone screens between 375px and 425px */
@@ -916,7 +1051,6 @@ header nav {
     margin-top: 0.5em;
   }
 }
-
 /* Phone screens between 320px and 375px */
 
 @media screen and (max-width: 375px) {
@@ -946,9 +1080,20 @@ header nav {
   #footer h3 {
     font-size: 1.3em;
   }
+
+  /* Forms (login and register) */
+  .form {
+    padding: 1em;
+    gap: 0.8em;
+  }
+
+  .form input {
+    padding: 0.35em;
+    font-size: 0.9em;
+  }
 }
 
-@media screen and (max-width: 330px) {
+@media screen and (max-width: 340px) {
   /* Home.jsx */
   #home-cont h1 {
     font-size: 0.9em;
@@ -960,6 +1105,26 @@ header nav {
 
   #home-cont div {
     margin-top: 0.5em;
+  }
+
+  /* Forms (login and register) */
+  .form-cont h1 {
+    font-size: 1.6em;
+  }
+
+  .form {
+    padding: 0.7em;
+    gap: 0.8em;
+  }
+
+  .form input {
+    padding: 0.3em;
+    font-size: 0.8em;
+  }
+
+  .form button {
+    margin-top: 0.4em;
+    font-size: 1.2em;
   }
 }
 
@@ -990,6 +1155,26 @@ header nav {
 
   #home-cont div {
     margin-top: 0;
+  }
+
+  /* Forms (login and register) */
+  .form-cont h1 {
+    font-size: 1.5em;
+  }
+
+  .form {
+    padding: 0.8em;
+    gap: 0.8em;
+  }
+
+  .form input {
+    padding: 0.3em;
+    font-size: 0.75em;
+  }
+
+  .form button {
+    margin-top: 0.4em;
+    font-size: 1.2em;
   }
 
   /* Footer.jsx */
