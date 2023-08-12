@@ -36,8 +36,9 @@ export default function App() {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (isLoggedIn === false && sessionLoggedIn === false) setUserToken(null);
+    if (isLoggedIn === false && sessionLoggedIn === "false") setUserToken(null);
     setActiveUsername("");
+    sessionStorage.setItem("activeUsername", "none");
   }, [isLoggedIn, sessionLoggedIn]);
 
   return (
