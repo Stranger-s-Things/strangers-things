@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   RiHome2Fill,
@@ -8,7 +8,7 @@ import {
   RiCloseLine,
 } from "react-icons/ri";
 
-export default function NavBar() {
+export default function NavBar({ userToken }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   function handleCloseMenu() {
@@ -50,6 +50,17 @@ export default function NavBar() {
 
             <p className="nav-link-text">Login</p>
           </Link>
+          {userToken && (
+            <Link
+              to="/profile"
+              className="nav-link"
+              onClick={() => handleCloseMenu()}
+            >
+              <RiUser3Fill className="nav-link-icon" />
+
+              <p className="nav-link-text">Profile</p>
+            </Link>
+          )}
         </nav>
       </div>
       {mobileMenuOpen === true ? (
