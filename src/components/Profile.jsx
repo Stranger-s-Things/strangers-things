@@ -16,13 +16,15 @@ export default function Profile({
   useEffect(() => {
     async function fetchProfile() {
       try {
+
         const data = await fetchLoggedIn(
           userToken ? userToken : sessionUserToken
         );
         console.log(data);
+
         return setActiveUser(data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
     fetchProfile();

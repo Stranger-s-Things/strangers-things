@@ -10,11 +10,13 @@ import {
   RiLogoutBoxFill,
 } from "react-icons/ri";
 
+
 export default function NavBar({
   isLoggedIn,
   onSetIsLoggedIn,
   sessionLoggedIn,
 }) {
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -59,6 +61,7 @@ export default function NavBar({
 
             <p className="nav-link-text">Posts</p>
           </Link>
+
           {sessionLoggedIn === "false" && isLoggedIn === false ? (
             <Link
               to="/account/login"
@@ -69,12 +72,15 @@ export default function NavBar({
               <p className="nav-link-text">Login</p>
             </Link>
           ) : (
+
+
             <Link
               to="/profile"
               className="nav-link"
               onClick={() => handleCloseMenu()}
             >
               <RiUser3Fill className="nav-link-icon" />
+
               <p className="nav-link-text">Profile</p>
             </Link>
           )}
@@ -92,6 +98,7 @@ export default function NavBar({
                 <p className="nav-link-text">Logout</p>
               </Link>
             ))}
+
         </nav>
       </div>
       {mobileMenuOpen === true ? (
