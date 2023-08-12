@@ -3,7 +3,11 @@ import { fetchNewPost } from "../API/index.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function PostForm({ userToken, sessionUserToken }) {
+export default function PostForm({
+  userToken,
+  sessionUserToken,
+  sessionLoggedIn,
+}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -16,8 +20,9 @@ export default function PostForm({ userToken, sessionUserToken }) {
 
   // This is a guard clause so that only users who are signed in can access the post form
   useEffect(() => {
-    if (sessionUserToken === "null") navigate("/account/login");
-  }, [navigate, sessionUserToken]);
+    if (sessionUserToken === "null" || sessionLoggedIn !== "true")
+      navigate("/account/login");
+  }, [navigate, sessionLoggedIn, sessionUserToken]);
 
   async function handleSubmit(e) {
     e.preventDefault();
