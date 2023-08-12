@@ -6,10 +6,22 @@ import {
   RiUser3Fill,
   RiMenuLine,
   RiCloseLine,
+  RiLoginBoxFill,
+  RiLogoutBoxFill,
 } from "react-icons/ri";
 
-export default function NavBar({ userToken }) {
+
+export default function NavBar({
+  isLoggedIn,
+  onSetIsLoggedIn,
+  sessionLoggedIn,
+}) {
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn === true && sessionLoggedIn === true) return;
+  }, [isLoggedIn, sessionLoggedIn]);
 
   function handleCloseMenu() {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -22,6 +34,14 @@ export default function NavBar({ userToken }) {
     document.querySelector(".main-nav").classList.add("nav-open");
     document.body.classList.add("no-scroll");
   }
+
+  function handleLogout() {
+    onSetIsLoggedIn(false);
+    sessionStorage.setItem("isLoggedIn", false);
+    sessionStorage.setItem("userToken", null);
+    sessionStorage.setItem("activeUsername", "none");
+  }
+  console.log(sessionLoggedIn);
 
   return (
     <header>
@@ -41,16 +61,19 @@ export default function NavBar({ userToken }) {
 
             <p className="nav-link-text">Posts</p>
           </Link>
-          <Link
-            to="/account/login"
-            className="nav-link"
-            onClick={() => handleCloseMenu()}
-          >
-            <RiUser3Fill className="nav-link-icon" />
 
-            <p className="nav-link-text">Login</p>
-          </Link>
-          {userToken && (
+          {sessionLoggedIn === "false" && isLoggedIn === false ? (
+            <Link
+              to="/account/login"
+              className="nav-link"
+              onClick={() => handleCloseMenu()}
+            >
+              <RiLoginBoxFill className="nav-link-icon" />
+              <p className="nav-link-text">Login</p>
+            </Link>
+          ) : (
+
+
             <Link
               to="/profile"
               className="nav-link"
@@ -61,6 +84,21 @@ export default function NavBar({ userToken }) {
               <p className="nav-link-text">Profile</p>
             </Link>
           )}
+          {isLoggedIn === true ||
+            (sessionLoggedIn === "true" && (
+              <Link
+                to="/"
+                className="nav-link"
+                onClick={() => {
+                  handleCloseMenu();
+                  handleLogout();
+                }}
+              >
+                <RiLogoutBoxFill className="nav-link-icon" />
+                <p className="nav-link-text">Logout</p>
+              </Link>
+            ))}
+
         </nav>
       </div>
       {mobileMenuOpen === true ? (
