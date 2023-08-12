@@ -7,24 +7,9 @@ import {
   RiMenuLine,
   RiCloseLine,
 } from "react-icons/ri";
-import { fetchLoggedIn } from "../API/index.js";
 
 export default function NavBar({ userToken }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeUser, setActiveUser] = useState(null);
-
-  useEffect(() => {
-    async function fetchProfile() {
-      try {
-        const data = await fetchLoggedIn(userToken);
-        console.log(data);
-        return setActiveUser(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchProfile();
-  }, [userToken]);
 
   function handleCloseMenu() {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -65,7 +50,7 @@ export default function NavBar({ userToken }) {
 
             <p className="nav-link-text">Login</p>
           </Link>
-          {activeUser?.success && (
+          {userToken && (
             <Link
               to="/profile"
               className="nav-link"
