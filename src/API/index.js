@@ -176,3 +176,25 @@ export async function editPost(
     console.log(err);
   }
 }
+
+export async function postMessage(postId, userToken, message) {
+  try {
+    const response = await fetch(`${POSTS_API_URL}/${postId}/messages`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application.json",
+        Authorization: `Bearer ${userToken}`,
+      },
+      body: JSON.stringify({
+        message: {
+          content: `${message}`,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+}

@@ -16,6 +16,7 @@ export default function Posts({ userToken, sessionUserToken }) {
           const data = await fetchPosts(
             userToken ? userToken : sessionUserToken
           );
+          console.log(data);
           return setPosts(data);
         } else {
           const data = await fetchPosts();
