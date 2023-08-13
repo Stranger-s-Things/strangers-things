@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchPosts } from "../API/index.js";
 
-export default function ViewPost({ userToken, sessionUserToken }) {
+export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function ViewPost({ userToken, sessionUserToken }) {
       }
     }
     PostFetch();
-  }, [userToken, sessionUserToken]);
+  }, [userToken, sessionUserToken, isLoggedIn]);
 
   let id = window.location.pathname;
   let postId = id.slice(7);
@@ -44,7 +44,6 @@ export default function ViewPost({ userToken, sessionUserToken }) {
           return (
             post._id === postId && (
               <div key={post._id} className="post-cont">
-                {console.log(post.isAuthor)}
                 <div>
                   <h3>{post.title}</h3>
                   <ul>
@@ -83,13 +82,22 @@ export default function ViewPost({ userToken, sessionUserToken }) {
                       <button>Delete</button>
                     </div>
                   )}
-                  {!post.isAuthor && (
+                  {!post.isAuthor && isLoggedIn && (
                     <p>
                       {/* Route to ViewPost.jsx to build out the individual post view for messaging the poster*/}
                       <Link className="post-link" to={`/posts/${post._id}`}>
                         Message
                       </Link>
                     </p>
+                  )}
+                </div>
+                <div className="post-link-cont">
+                  {!post.isAuthor && !isLoggedIn && (
+                    <div>
+                      <Link to="/account/login" className="post-link">
+                        Login
+                      </Link>
+                    </div>
                   )}
                 </div>
               </div>

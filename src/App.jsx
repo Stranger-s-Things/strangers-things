@@ -76,6 +76,7 @@ export default function App() {
               <ViewPost
                 userToken={userToken}
                 sessionUserToken={sessionUserToken}
+                isLoggedIn={isLoggedIn}
               />
             }
           />
