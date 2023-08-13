@@ -126,3 +126,19 @@ export async function fetchNewPost(
     console.error(err);
   }
 }
+
+export async function deletePost(postId, userToken) {
+  try {
+    const response = await fetch(`${POSTS_API_URL}/${postId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+}

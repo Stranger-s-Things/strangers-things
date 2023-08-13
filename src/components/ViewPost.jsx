@@ -5,10 +5,11 @@
 //  messages sent to you for that post
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchPosts } from "../API/index.js";
+import { fetchPosts, deletePost } from "../API/index.js";
 
 export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
   const [posts, setPosts] = useState(null);
+  const postId = window.location.pathname.slice(7);
 
   useEffect(() => {
     async function PostFetch() {
@@ -29,8 +30,10 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
     PostFetch();
   }, [userToken, sessionUserToken, isLoggedIn]);
 
-  let id = window.location.pathname;
-  let postId = id.slice(7);
+  async function handleDelete(postId) {
+    await deletePost(postId, sessionUserToken);
+    console.log("post deleted");
+  }
 
   return (
     <div>
@@ -79,7 +82,13 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
                   {post.isAuthor && (
                     <div>
                       <button>Edit</button>
-                      <button>Delete</button>
+                      <button
+                        onClick={() => {
+                          handleDelete(postId);
+                        }}
+                      >
+                        Delete
+                      </button>
                     </div>
                   )}
                   {!post.isAuthor && isLoggedIn && (
