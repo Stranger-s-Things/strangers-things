@@ -7,11 +7,15 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchPosts, deletePost } from "../API/index.js";
 import EditPost from "./EditPost.jsx";
+import { postMessage } from "../API/index.js";
+import Message from "./Message.jsx";
 
 export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
   const [posts, setPosts] = useState(null);
-  const [showComponent, setShowComponent] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [showMessageForm, setShowMessageForm] = useState(false);
   const postId = window.location.pathname.slice(7);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     async function PostFetch() {
@@ -37,8 +41,17 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
     console.log("post deleted");
   }
 
-  function handleClick() {
-    setShowComponent(true);
+  function handleEditClick() {
+    setShowEditForm(true);
+  }
+
+  function handleMessageClick() {
+    setShowMessageForm(true);
+  }
+
+  async function handleMessage() {
+    await postMessage(postId, sessionUserToken, message);
+    console.log("send message");
   }
 
   return (
@@ -89,7 +102,7 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
                     <div>
                       <button
                         onClick={() => {
-                          handleClick();
+                          handleEditClick();
                         }}
                       >
                         Edit
@@ -106,7 +119,13 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
                   {!post.isAuthor && isLoggedIn && (
                     <p>
                       {/* Route to ViewPost.jsx to build out the individual post view for messaging the poster*/}
-                      <Link className="post-link" to={`/posts/${post._id}`}>
+                      <Link
+                        className="post-link"
+                        to={`/posts/${post._id}`}
+                        onClick={() => {
+                          handleMessageClick();
+                        }}
+                      >
                         Message
                       </Link>
                     </p>
@@ -125,8 +144,11 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
             )
           );
         })}
-      {showComponent && (
+      {showEditForm && (
         <EditPost userToken={userToken} sessionUserToken={sessionUserToken} />
+      )}
+      {showMessageForm && (
+        <Message userToken={userToken} sessionUserToken={sessionUserToken} />
       )}
     </div>
   );
