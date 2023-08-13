@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchPosts } from "../API/index.js";
 import { RiDraftFill } from "react-icons/ri";
+import ViewPost from "./ViewPost.jsx";
 
 export default function Posts({ userToken, sessionUserToken }) {
   const [posts, setPosts] = useState([]);
@@ -26,7 +27,7 @@ export default function Posts({ userToken, sessionUserToken }) {
     }
     PostsFetch();
   }, [sessionUserToken, userToken]);
-  console.log(posts);
+
   return (
     <div id="posts-page-cont">
       <div id="posts-page-heading">
@@ -79,7 +80,7 @@ export default function Posts({ userToken, sessionUserToken }) {
                 </div>
 
                 <div className="post-link-cont">
-                  {post.isAuthor === true && (
+                  {post.isAuthor && (
                     <p>
                       {/* Route to ViewPost.jsx to build out the individual post view */}
                       <Link className="post-link" to={`/posts/${post._id}`}>
@@ -87,7 +88,7 @@ export default function Posts({ userToken, sessionUserToken }) {
                       </Link>
                     </p>
                   )}
-                  {post.isAuthor === false && (
+                  {!post.isAuthor && (
                     <p>
                       {/* Route to ViewPost.jsx to build out the individual post view for messaging the poster*/}
                       <Link className="post-link" to={`/posts/${post._id}`}>
