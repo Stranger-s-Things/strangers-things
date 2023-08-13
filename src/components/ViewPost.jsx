@@ -6,9 +6,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchPosts, deletePost } from "../API/index.js";
+import EditPost from "./EditPost.jsx";
 
 export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
   const [posts, setPosts] = useState(null);
+  const [showComponent, setShowComponent] = useState(false);
   const postId = window.location.pathname.slice(7);
 
   useEffect(() => {
@@ -33,6 +35,10 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
   async function handleDelete(postId) {
     await deletePost(postId, sessionUserToken);
     console.log("post deleted");
+  }
+
+  function handleClick() {
+    setShowComponent(true);
   }
 
   return (
@@ -81,7 +87,13 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
                 <div className="post-link-cont">
                   {post.isAuthor && (
                     <div>
-                      <button>Edit</button>
+                      <button
+                        onClick={() => {
+                          handleClick();
+                        }}
+                      >
+                        Edit
+                      </button>
                       <button
                         onClick={() => {
                           handleDelete(postId);
@@ -113,6 +125,9 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
             )
           );
         })}
+      {showComponent && (
+        <EditPost userToken={userToken} sessionUserToken={sessionUserToken} />
+      )}
     </div>
   );
 }

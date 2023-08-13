@@ -142,3 +142,37 @@ export async function deletePost(postId, userToken) {
     console.log(err);
   }
 }
+
+export async function editPost(
+  postId,
+  userToken,
+  title,
+  description,
+  price,
+  location,
+  willDeliver
+) {
+  try {
+    const response = await fetch(`${POSTS_API_URL}/${postId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+      body: JSON.stringify({
+        post: {
+          title: `${title}`,
+          description: `${description}`,
+          price: `${price}`,
+          location: `${location}`,
+          willDeliver: `${willDeliver}`,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+}
