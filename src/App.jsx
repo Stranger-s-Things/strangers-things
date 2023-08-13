@@ -70,7 +70,16 @@ export default function App() {
               />
             }
           />
-          <Route path="/posts/:postId" element={<ViewPost />} />
+          <Route
+            path="/posts/:postId"
+            element={
+              <ViewPost
+                userToken={userToken}
+                sessionUserToken={sessionUserToken}
+                isLoggedIn={isLoggedIn}
+              />
+            }
+          />
           <Route
             path="/posts/add"
             element={
