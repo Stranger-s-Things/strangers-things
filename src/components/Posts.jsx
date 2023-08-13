@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchPosts } from "../API/index.js";
 import { RiDraftFill } from "react-icons/ri";
-import ViewPost from "./ViewPost.jsx";
 
 export default function Posts({ userToken, sessionUserToken }) {
   const [posts, setPosts] = useState([]);
