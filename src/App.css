@@ -5,10 +5,21 @@
   font-family: "Ultra", serif;
 }
 
+html {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  /* Only works if nothing is absolutely positioned in relation to the body */
+  overflow-x: hidden;
+}
+
 .home-page {
   background: linear-gradient(0deg, #e4ccaa38, #e4ccaa38),
     url("https://images.unsplash.com/photo-1561065465-0928c7ee69cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
   background-size: cover;
+  background-position: center center;
 }
 
 #main-cont {
@@ -19,6 +30,16 @@
 
 #root {
   margin: 0 auto;
+}
+
+.no-scroll {
+  overflow-y: hidden;
+  position: fixed;
+}
+
+.sub-titling {
+  font-size: 1.4em;
+  color: #72664f;
 }
 /* ******************************************** */
 
@@ -31,6 +52,7 @@ header {
   align-items: center;
   /* background-color: #796f5b; */
   padding: 1em 1.5em;
+  position: relative;
 }
 
 header h1 {
@@ -44,6 +66,11 @@ header nav {
   justify-content: space-evenly;
   gap: 1.6em;
   font-size: 1.5em;
+}
+
+.nav-mobile-icon,
+.nav-link-icon {
+  display: none;
 }
 
 .nav-link:link,
@@ -89,11 +116,12 @@ header nav {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  gap: 1em;
   align-items: center;
+  gap: 1em;
 }
 
 #home-cont button {
+  padding-top: 0.1em;
   font-size: 1.1em;
   background: none;
   border: none;
@@ -109,10 +137,76 @@ header nav {
 /* ******************************************** */
 
 /* Posts.jsx */
+#posts-page-cont {
+  margin: 0.3em 1.8em;
+}
+
+#posts-page-heading {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4em 0;
+}
+
+#posts-page-heading h1 {
+  font-size: 3.2em;
+  color: #584a2e;
+}
+
+.nav-new-post {
+  font-size: 1.6em;
+}
+
+#search-bar form input {
+  font-size: 1.3em;
+  margin: 1em 0 0 0;
+  padding: 0.2em 0.2em 0.2em 0.6em;
+  border-radius: 0.2em;
+  border: none;
+  position: relative;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+#search-bar input:focus,
+#search-bar select:focus {
+  outline: none;
+  box-shadow: 2px 2px 2px 1px #825c15;
+}
+
+#search-bar:before,
+#search-bar:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  top: 10px;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  -moz-border-radius: 100px / 10px;
+  border-radius: 100px / 10px;
+}
+#search-bar:after {
+  right: 10px;
+  left: auto;
+  -webkit-transform: skew(8deg) rotate(3deg);
+  -moz-transform: skew(8deg) rotate(3deg);
+  -ms-transform: skew(8deg) rotate(3deg);
+  -o-transform: skew(8deg) rotate(3deg);
+  transform: skew(8deg) rotate(3deg);
+}
+
 #posts {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .post-cont {
@@ -120,7 +214,7 @@ header nav {
   margin: 1em 0;
   padding: 1.3em 2.6em;
   border-radius: 0.75em;
-  width: 43%;
+  width: 44%;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
@@ -157,6 +251,10 @@ header nav {
   color: #685432;
 }
 
+.post-location {
+  margin-bottom: 1.3em;
+}
+
 .post-li-second-item {
   color: #86590b;
 }
@@ -165,8 +263,74 @@ header nav {
   color: #7d7058;
   margin-bottom: 0.8em;
 }
-/* ******************************************** */
 
+.post-link {
+  margin-top: 0.5em;
+  font-size: 1.3em;
+}
+
+.post-link:link,
+.post-link:visited {
+  text-decoration: none;
+  color: #825c15;
+}
+
+.post-link:hover,
+.post-link:active {
+  transition: all 0.4s;
+  color: #937a4d;
+}
+
+.post-link-icon {
+  display: none;
+}
+/* ******************************************** */
+/* View Post.jsx */
+.view-post-cont {
+  margin: 1em 0;
+  padding: 1.3em 2em;
+}
+
+.view-post-link h1 {
+  margin-bottom: 1em;
+  font-size: 2.1em;
+}
+
+#view-post-btns-cont {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 2em;
+}
+
+.view-post-btn {
+  margin-top: 1em;
+  font-size: 1.6em;
+  background: none;
+  border: none;
+  color: #7b684a;
+}
+.view-post-btn:hover {
+  transition: all 0.4s;
+  cursor: pointer;
+  color: #5b4d30;
+}
+/* ******************************************** */
+/* Profile.jsx */
+#profile-cont {
+  margin: 1em 0;
+  padding: 0.4em 2em;
+}
+
+#profile-cont h1 {
+  margin-bottom: 0.5em;
+  font-size: 3.2em;
+  color: #584a2e;
+}
+
+#profile-messages-cont {
+  display: flex;
+  flex-flow: column wrap;
+}
 /* Forms (login and register) */
 
 .form-cont {
@@ -269,6 +433,59 @@ header nav {
 
 #success {
   padding: 1em 4em 0 4em;
+  text-align: center;
+}
+/* ******************************************** */
+
+/* PostForm.jsx */
+
+.form label {
+  margin-left: 0.3em;
+  padding: 0.4em;
+  color: #84745b;
+  font-size: 2em;
+}
+
+#checkbox-label {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2em;
+  align-items: center;
+}
+
+.form input[type="checkbox"] {
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #b1a288;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+.form input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+.form input[type="checkbox"]:checked::before {
+  transform: scale(1);
+  background-color: #cfc6b5;
+}
+
+#post-form-btn {
+  font-size: 3em;
 }
 /* ******************************************** */
 
@@ -301,4 +518,1038 @@ header nav {
   transition: all 0.3s;
   cursor: pointer;
   color: #977e4d;
+}
+/* ******************************************** */
+/* ******************************************** */
+/* ******************************************** */
+/* ******************************************** */
+/* ******************************************** */
+
+/* MEDIA QUERIES */
+
+/* Large Monitor screens over 1440px */
+@media screen and (max-width: 1800px) {
+  /* Home.jsx */
+
+  #home-cont {
+    padding-top: 3em;
+  }
+
+  #home-cont h1 {
+    font-size: 4em;
+  }
+
+  #home-cont h2 {
+    font-size: 3em;
+  }
+
+  #home-cont h3 {
+    font-size: 1.4em;
+  }
+
+  /* Footer.jsx */
+  #footer {
+    flex-flow: column wrap;
+    gap: 2em;
+  }
+
+  #footer h3 {
+    font-size: 3em;
+  }
+
+  #footer h5 {
+    font-size: 1.4em;
+    text-align: center;
+  }
+
+  .icon {
+    font-size: 2.5em;
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  /* Forms (login and register) */
+
+  .form-cont {
+    width: 70%;
+  }
+
+  #success {
+    padding: 1em 4em 0 4em;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  /* Posts.jsx */
+  #posts-page-cont {
+    margin: 0.3em 1.3em;
+  }
+
+  #posts-page-heading {
+    padding: 1.4em 0;
+  }
+
+  #posts-page-heading h1 {
+    font-size: 3.2em;
+  }
+
+  .nav-new-post {
+    font-size: 1.6em;
+  }
+
+  .post-cont {
+    margin: 1em 0;
+    width: 43%;
+    gap: 1em;
+  }
+
+  .post-cont ul li {
+    gap: 0.8em;
+  }
+
+  .post-cont h3 {
+    font-size: 1.6em;
+    margin-bottom: 0.6em;
+  }
+
+  .post-cont p,
+  .post-cont b {
+    font-size: 1.2em;
+  }
+
+  .post-description {
+    margin-bottom: 0.8em;
+  }
+
+  .post-link {
+    margin-top: 0.5em;
+    font-size: 1.3em;
+  }
+}
+
+/* Laptop screens between 1024px and 1440px */
+
+@media screen and (max-width: 1300px) {
+  /* Home.jsx */
+
+  #home-cont {
+    padding-top: 2.6em;
+  }
+
+  #home-cont h1 {
+    font-size: 3.2em;
+  }
+
+  #home-cont h2 {
+    font-size: 2.8em;
+  }
+
+  #home-cont h3 {
+    font-size: 1em;
+  }
+
+  #home-cont button {
+    font-size: 1em;
+  }
+
+  /* Posts.jsx */
+  #posts-page-heading h1 {
+    font-size: 3em;
+  }
+
+  .nav-new-post {
+    font-size: 1.4em;
+  }
+
+  .post-cont {
+    width: 42%;
+  }
+
+  /* Footer.jsx */
+  #footer {
+    gap: 1.4em;
+  }
+
+  #footer h3 {
+    font-size: 2.7em;
+  }
+
+  #footer h5 {
+    font-size: 1.2em;
+  }
+
+  .icon {
+    font-size: 2.5em;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  /* NavBar.jsx */
+  header {
+    padding: 1em 1.5em;
+  }
+
+  header h1 {
+    font-size: 2em;
+  }
+
+  header nav {
+    gap: 1.6em;
+    font-size: 1.3em;
+  }
+
+  /* Posts.jsx */
+  #posts-page-heading h1 {
+    font-size: 2.6em;
+  }
+
+  .nav-new-post {
+    font-size: 1.2em;
+  }
+
+  .post-cont {
+    width: 41%;
+    margin: 0.7em 0;
+  }
+}
+
+/* Laptop screens between 768px and 1024px */
+
+@media screen and (max-width: 1068px) {
+  .post-cont {
+    width: 40%;
+    margin: 0.7em 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  /* Home.jsx */
+
+  #home-cont {
+    padding-top: 2.3em;
+  }
+
+  #home-cont h1 {
+    font-size: 2.8em;
+  }
+
+  #home-cont h2 {
+    font-size: 2.4em;
+  }
+
+  #home-cont h3 {
+    font-size: 0.8em;
+  }
+
+  #home-cont button {
+    font-size: 0.9em;
+  }
+
+  /* Forms (login and register) */
+
+  .form-cont {
+    width: 85%;
+    gap: 0;
+    margin: 3em auto;
+    padding: 2em 0 5em 0;
+  }
+
+  .form-cont h1 {
+    font-size: 4em;
+  }
+
+  .form-cont h4 {
+    font-size: 1em;
+  }
+
+  .form {
+    padding: 2em;
+    gap: 1.4em;
+  }
+
+  .form input {
+    margin-left: 0.6em;
+    padding: 0.4em;
+    font-size: 1.8em;
+  }
+
+  .form button {
+    margin-top: 0.6em;
+    font-size: 1.8em;
+  }
+
+  #success {
+    padding: 1em 4em 0 4em;
+    text-align: center;
+  }
+
+  /* Footer.jsx */
+  #footer {
+    gap: 1em;
+  }
+
+  #footer h3 {
+    font-size: 2.3em;
+  }
+
+  #footer h5 {
+    font-size: 1em;
+  }
+
+  .icon {
+    font-size: 2em;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  /* Navbar.jsx */
+  header {
+    padding: 1em 1.9em;
+  }
+
+  header h1 {
+    font-size: 1.7em;
+  }
+
+  header nav {
+    gap: 1.8em;
+    font-size: 1em;
+  }
+
+  /* Home.jsx */
+
+  #home-cont {
+    padding-top: 1.6em;
+  }
+
+  #home-cont h1 {
+    font-size: 2.4em;
+  }
+
+  #home-cont h2 {
+    font-size: 2em;
+  }
+
+  /* Posts.jsx */
+  #posts-page-heading h1 {
+    font-size: 2.3em;
+  }
+
+  .nav-new-post {
+    font-size: 1em;
+  }
+
+  .post-cont {
+    width: 41%;
+    margin: 0.7em 0;
+    padding: 1.3em 1.8em;
+  }
+
+  .post-cont h3 {
+    font-size: 1.3em;
+  }
+
+  .post-cont p,
+  .post-cont b {
+    font-size: 1em;
+  }
+
+  .post-link {
+    font-size: 1.1em;
+  }
+
+  /* Footer.jsx */
+  #footer {
+    gap: 1em;
+  }
+
+  #footer h3 {
+    font-size: 2em;
+  }
+
+  #footer h5 {
+    font-size: 0.8em;
+  }
+
+  .icon {
+    font-size: 1.8em;
+  }
+}
+
+/* Tablet screens between 425px and 768px */
+
+@media screen and (max-width: 740px) {
+  /* Navbar.jsx */
+  header {
+    padding: 1em 1.2em;
+  }
+
+  header h1 {
+    font-size: 1.3em;
+  }
+
+  header nav {
+    gap: 1.8em;
+    font-size: 0.8em;
+  }
+
+  /* Home.jsx */
+
+  #home-cont {
+    padding-top: 1.6em;
+  }
+
+  #home-cont h1 {
+    font-size: 2em;
+  }
+
+  #home-cont h2 {
+    font-size: 1.6em;
+  }
+  #home-cont button {
+    padding-top: 0;
+  }
+
+  /* Posts.jsx */
+  #posts-page-heading {
+    padding: 1.2em 0;
+  }
+
+  #posts-page-heading h1 {
+    font-size: 1.8em;
+  }
+
+  .nav-new-post {
+    font-size: 0.9em;
+  }
+
+  .post-cont {
+    width: 95%;
+    margin: 0.4em 0;
+    padding: 1.2em 1.6em;
+  }
+
+  /* Forms (login and register) */
+
+  .form-cont {
+    margin: 2em auto;
+  }
+
+  .form-cont h1 {
+    font-size: 3em;
+  }
+
+  .form-cont h4 {
+    font-size: 0.8em;
+  }
+
+  .form input {
+    padding: 0.3em;
+    font-size: 1.4em;
+  }
+
+  .form button {
+    margin-top: 0.6em;
+    font-size: 1.6em;
+  }
+
+  /* Footer.jsx */
+  #footer {
+    gap: 1em;
+  }
+
+  #footer h3 {
+    font-size: 1.8em;
+  }
+
+  #footer h5 {
+    font-size: 0.6em;
+  }
+
+  .icon {
+    font-size: 1.6em;
+  }
+}
+
+@media screen and (max-width: 656px) {
+  /* Navbar.jsx */
+  header {
+    padding: 1em 0.8em;
+    align-items: start;
+  }
+
+  header h1 {
+    font-size: 1.6em;
+  }
+
+  header nav {
+    gap: 1.6em;
+    font-size: 0.8em;
+  }
+
+  .nav-link {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 0.2em;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-link-text {
+    font-size: 0.6em;
+  }
+
+  .nav-link-icon {
+    display: inline-block;
+    font-size: 1.8em;
+  }
+
+  /* Home.jsx */
+
+  .home-page {
+    background: linear-gradient(0deg, #e4ccaa38, #e4ccaa38),
+      url("https://images.unsplash.com/photo-1561065450-018a72a76f61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80");
+    background-size: cover;
+    background-position: center center;
+  }
+
+  #home-cont {
+    padding-top: 1.6em;
+  }
+
+  #home-cont h1 {
+    font-size: 1.8em;
+  }
+
+  #home-cont h2 {
+    font-size: 1.4em;
+  }
+
+  #home-cont h3 {
+    font-size: 0.7em;
+  }
+
+  #home-cont button {
+    font-size: 0.7em;
+  }
+
+  /* Footer.jsx */
+  #footer {
+    gap: 0.75em;
+    text-align: center;
+  }
+
+  #footer h3 {
+    font-size: 1.6em;
+  }
+
+  #footer h5 {
+    font-size: 0.6em;
+  }
+
+  .icon {
+    font-size: 1.6em;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  /* Forms (login and register) */
+  .form-cont h1 {
+    font-size: 2.4em;
+  }
+
+  .form-cont h4 {
+    font-size: 0.8em;
+  }
+
+  .form input {
+    padding: 0.3em;
+    font-size: 1em;
+  }
+
+  .form button {
+    margin-top: 0.4em;
+    font-size: 1.3em;
+  }
+}
+
+@media screen and (max-width: 566px) {
+  /* Navbar.jsx */
+  header {
+    padding: 1em;
+  }
+
+  header h1 {
+    font-size: 1.4em;
+  }
+
+  header nav {
+    gap: 1.4em;
+  }
+
+  /* Home.jsx */
+
+  #home-cont {
+    padding: 1em;
+    text-align: center;
+  }
+
+  #home-cont h1 {
+    font-size: 1.6em;
+  }
+
+  #home-cont h2 {
+    font-size: 1.2em;
+  }
+
+  #home-cont h3 {
+    font-size: 0.7em;
+  }
+
+  #home-cont button {
+    font-size: 0.6em;
+  }
+
+  /* Posts.jsx */
+  #posts-page-cont {
+    margin: 0.3em 0.8em;
+  }
+
+  #posts-page-heading {
+    padding: 1.2em 0;
+  }
+
+  #posts-page-heading h1 {
+    font-size: 1.5em;
+  }
+
+  .nav-new-post {
+    font-size: 0.7em;
+  }
+
+  .post-cont {
+    width: 99%;
+    margin: 0.4em 0;
+    padding: 1.2em;
+  }
+
+  .post-cont h3 {
+    font-size: 1.1em;
+  }
+
+  .post-cont p,
+  .post-cont b {
+    font-size: 0.8em;
+  }
+
+  .post-link {
+    font-size: 1em;
+  }
+
+  .post-link-icon {
+    display: block;
+    font-size: 2em;
+  }
+  .post-link-text {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  /* Navbar.jsx */
+
+  header h1 {
+    font-size: 1.3em;
+  }
+
+  header nav {
+    gap: 1.2em;
+    margin-top: 0.3em;
+  }
+
+  .nav-link-text {
+    display: none;
+  }
+
+  /* Home.jsx */
+  #home-cont h1 {
+    font-size: 1.4em;
+  }
+
+  #home-cont h2 {
+    font-size: 1em;
+  }
+
+  #home-cont div {
+    margin-top: 1em;
+    padding: 1em 2em;
+  }
+
+  #home-cont h3 {
+    font-size: 0.7em;
+  }
+
+  #home-cont button {
+    font-size: 0.6em;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  /* Navbar.jsx */
+  header {
+    padding: 1em 0.8em;
+  }
+
+  header h1 {
+    font-size: 1.2em;
+  }
+
+  header nav {
+    gap: 1.1em;
+  }
+
+  /* Home.jsx */
+  #home-cont h1 {
+    font-size: 1.2em;
+  }
+
+  #home-cont h2 {
+    font-size: 0.9em;
+  }
+
+  #home-cont div {
+    margin-top: 0.5em;
+  }
+
+  /* Posts.jsx */
+
+  #posts-page-heading {
+    padding: 0.9em 0;
+  }
+
+  #posts-page-heading h1 {
+    font-size: 1.4em;
+  }
+
+  .post-cont {
+    width: 98%;
+    margin: 0.4em 0;
+    padding: 1em;
+  }
+
+  .post-cont h3 {
+    font-size: 0.9em;
+  }
+
+  .post-cont ul li {
+    gap: 0.3em;
+  }
+
+  .post-cont p,
+  .post-cont b {
+    font-size: 0.7em;
+  }
+
+  .post-link-icon {
+    display: block;
+    font-size: 1.8em;
+  }
+
+  /* Forms (login and register) */
+  .form-cont {
+    margin: 1em auto;
+    padding: 2em 0 3em 0;
+    width: 93%;
+  }
+
+  .form-cont h1 {
+    font-size: 2.3em;
+  }
+
+  .form-cont h4 {
+    font-size: 0.7em;
+  }
+
+  .form {
+    padding: 1.2em;
+    gap: 0.8em;
+  }
+
+  .form input {
+    padding: 0.35em;
+    font-size: 1em;
+  }
+
+  .form button {
+    margin-top: 0.4em;
+    font-size: 1.4em;
+  }
+
+  .password-cont .icon {
+    font-size: 1.2em;
+  }
+
+  .login-cont h4 {
+    padding: 0 1.4em;
+    text-align: center;
+  }
+}
+
+/* Phone screens between 375px and 425px */
+
+@media screen and (max-width: 425px) {
+  .nav-mobile-icon {
+    display: block;
+    z-index: 9999;
+    color: #817151;
+    font-size: 2em;
+  }
+
+  .nav-mobile-icon:hover,
+  .nav-mobile-icon:active {
+    transition: all 0.4s;
+    color: #b6aa91;
+    cursor: pointer;
+  }
+
+  .main-nav {
+    background-color: #cfc6b5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    transform: translateX(100%);
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .nav-open {
+    opacity: 0.9;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translateX(0);
+    position: fixed;
+    margin-top: 0;
+  }
+
+  .nav-link {
+    flex-flow: row wrap;
+    gap: 0.8em;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-link-text {
+    display: inline-block;
+    font-size: 1.4em;
+  }
+
+  header nav {
+    flex-flow: column wrap;
+    gap: 1.5em;
+    font-size: 1.7em;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5em 0 0 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  /* Navbar.jsx */
+  header h1 {
+    font-size: 1.1em;
+  }
+
+  header nav {
+    gap: 1.1em;
+  }
+
+  /* Home.jsx */
+  #home-cont h1 {
+    font-size: 1em;
+  }
+
+  #home-cont h2 {
+    font-size: 0.8em;
+  }
+
+  #home-cont div {
+    margin-top: 0.5em;
+  }
+}
+/* Phone screens between 320px and 375px */
+
+@media screen and (max-width: 375px) {
+  /* Navbar.jsx */
+  header h1 {
+    font-size: 1.1em;
+  }
+
+  header nav {
+    gap: 1.1em;
+  }
+
+  /* Home.jsx */
+  #home-cont h1 {
+    font-size: 1em;
+  }
+
+  #home-cont h2 {
+    font-size: 0.8em;
+  }
+
+  #home-cont div {
+    margin-top: 0.5em;
+  }
+
+  /* Footer.jsx */
+  #footer h3 {
+    font-size: 1.3em;
+  }
+
+  /* Forms (login and register) */
+  .form {
+    padding: 1em;
+    gap: 0.8em;
+  }
+
+  .form input {
+    padding: 0.35em;
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  /* Home.jsx */
+  #home-cont h1 {
+    font-size: 0.9em;
+  }
+
+  #home-cont h2 {
+    font-size: 0.7em;
+  }
+
+  #home-cont div {
+    margin-top: 0.5em;
+  }
+
+  /* Forms (login and register) */
+  .form-cont h1 {
+    font-size: 1.6em;
+  }
+
+  .form {
+    padding: 0.7em;
+    gap: 0.8em;
+  }
+
+  .form input {
+    padding: 0.3em;
+    font-size: 0.8em;
+  }
+
+  .form button {
+    margin-top: 0.4em;
+    font-size: 1.2em;
+  }
+}
+
+/* Phone screens max-width: 320px */
+
+@media screen and (max-width: 302px) {
+  /* Navbar.jsx */
+  header {
+    padding: 1em 0.6em;
+  }
+
+  header h1 {
+    font-size: 1em;
+  }
+
+  header nav {
+    gap: 1.1em;
+  }
+
+  .nav-mobile-icon {
+    font-size: 1.6em;
+  }
+
+  /* Home.jsx */
+  #home-cont h1 {
+    font-size: 0.8em;
+  }
+
+  #home-cont h2 {
+    font-size: 0.6em;
+  }
+
+  #home-cont div {
+    margin-top: 0;
+  }
+
+  /* Posts.jsx */
+  #posts-page-cont {
+    margin: 0.3em 0.7em;
+  }
+
+  #posts-page-heading {
+    padding: 0.6em 0;
+  }
+
+  #posts-page-heading h1 {
+    font-size: 1.2em;
+  }
+
+  .post-cont {
+    width: 99%;
+    margin: 0.3em 0;
+    padding: 0.8em;
+  }
+
+  .post-cont h3 {
+    font-size: 0.8em;
+  }
+
+  .post-cont p,
+  .post-cont b {
+    font-size: 0.6em;
+  }
+
+  .post-link-icon {
+    font-size: 1.7em;
+  }
+
+  /* Forms (login and register) */
+  .form-cont h1 {
+    font-size: 1.5em;
+  }
+
+  .form {
+    padding: 0.8em;
+    gap: 0.8em;
+  }
+
+  .form input {
+    padding: 0.3em;
+    font-size: 0.75em;
+  }
+
+  .form button {
+    margin-top: 0.4em;
+    font-size: 1.2em;
+  }
+
+  /* Footer.jsx */
+  #footer h3 {
+    font-size: 1.2em;
+  }
 }

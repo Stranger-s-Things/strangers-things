@@ -5,6 +5,8 @@ import Login from "./components/Login.jsx";
 import Profile from "./components/Profile.jsx";
 import Register from "./components/Register.jsx";
 import Footer from "./components/Footer.jsx";
+import PostForm from "./components/PostForm.jsx";
+import ViewPost from "./components/ViewPost.jsx";
 
 import "./App.css";
 
@@ -15,7 +17,12 @@ export default function App() {
   const [inputType, setInputType] = useState("password");
   const [userToken, setUserToken] = useState(null);
   const [activeUsername, setActiveUsername] = useState("");
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Session Storage Data
+  const sessionUserToken = sessionStorage.getItem("userToken");
+  const sessionLoggedIn = sessionStorage.getItem("isLoggedIn");
+  const sessionActiveUsername = sessionStorage.getItem("activeUsername");
 
   const location = useLocation();
 
@@ -28,19 +35,62 @@ export default function App() {
     }
   }, [location.pathname]);
 
-useEffect(() => {
-  console.log('isLoggedIn: ', isLoggedIn)
-}, 
-[isLoggedIn]
-)
+  useEffect(() => {
+    if (isLoggedIn === false && sessionLoggedIn === "false") setUserToken(null);
+    setActiveUsername("");
+    sessionStorage.setItem("activeUsername", "none");
+  }, [isLoggedIn, sessionLoggedIn]);
 
   return (
     <section>
       <div id="main-cont">
-        <Navbar />
+        <Navbar
+          isLoggedIn={isLoggedIn}
+          sessionLoggedIn={sessionLoggedIn}
+          onSetIsLoggedIn={setIsLoggedIn}
+        />
         <Routes>
-          <Route path="/" element={<Home activeUsername={activeUsername} />} />
-          <Route path="/posts" element={<Posts />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                activeUsername={activeUsername}
+                sessionActiveUsername={sessionActiveUsername}
+                isLoggedIn={isLoggedIn}
+                sessionLoggedIn={sessionLoggedIn}
+              />
+            }
+          />
+          <Route
+            path="/posts"
+            element={
+              <Posts
+                userToken={userToken}
+                sessionUserToken={sessionUserToken}
+              />
+            }
+          />
+          <Route
+            path="/posts/:postId"
+            element={
+              <ViewPost
+                userToken={userToken}
+                sessionUserToken={sessionUserToken}
+                sessionLoggedIn={sessionLoggedIn}
+                isLoggedIn={isLoggedIn}
+              />
+            }
+          />
+          <Route
+            path="/posts/add"
+            element={
+              <PostForm
+                userToken={userToken}
+                sessionUserToken={sessionUserToken}
+                sessionLoggedIn={sessionLoggedIn}
+              />
+            }
+          />
           <Route
             path="/account/login"
             element={
@@ -48,7 +98,7 @@ useEffect(() => {
                 inputType={inputType}
                 onSetInputType={setInputType}
                 onSetUserToken={setUserToken}
-                onSetLoggedIn={setLoggedIn}
+                onSetIsLoggedIn={setIsLoggedIn}
               />
             }
           />
@@ -63,6 +113,8 @@ useEffect(() => {
             element={
               <Profile
                 userToken={userToken}
+                sessionUserToken={sessionUserToken}
+                sessionLoggedIn={sessionLoggedIn}
                 onSetActiveUsername={setActiveUsername}
               />
             }

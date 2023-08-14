@@ -3,7 +3,12 @@ import { fetchLogin } from "../API/index.js";
 import { Link, useNavigate } from "react-router-dom";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
-export default function Login({ inputType, onSetInputType, onSetUserToken, onSetLoggedIn}) {
+export default function Login({
+  inputType,
+  onSetInputType,
+  onSetUserToken,
+  onSetIsLoggedIn,
+}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -22,9 +27,11 @@ export default function Login({ inputType, onSetInputType, onSetUserToken, onSet
     if (user.success) {
       onSetUserToken(user.data.token);
       setSuccessMessage(user.data.message);
+      onSetIsLoggedIn(true);
       setUsername("");
       setPassword("");
-      onSetLoggedIn(true)
+      sessionStorage.setItem("isLoggedIn", true);
+      sessionStorage.setItem("userToken", user.data.token);
       setTimeout(() => {
         navigate("/profile");
       }, 3000);
