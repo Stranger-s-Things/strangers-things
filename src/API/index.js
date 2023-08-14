@@ -182,12 +182,12 @@ export async function postMessage(postId, userToken, message) {
     const response = await fetch(`${POSTS_API_URL}/${postId}/messages`, {
       method: "POST",
       headers: {
-        "Content-Type": "application.json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${userToken}`,
       },
       body: JSON.stringify({
         message: {
-          content: `${message}`,
+          content: message,
         },
       }),
     });

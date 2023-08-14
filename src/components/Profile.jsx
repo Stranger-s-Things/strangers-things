@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchLoggedIn } from "../API/index.js";
+import  EditPost  from "./Message.jsx";
 
 export default function Profile({
   userToken,
@@ -43,7 +44,23 @@ export default function Profile({
       {activeUser?.data.messages.length === 0 ? (
         <p>No messages sent</p>
       ) : (
-        <p>Messages you sent: </p>
+        <div>
+          <p>Messages you sent: </p>
+          <ul>
+            {activeUser?.data.messages.map((message, index) => (
+            <li key={index}>
+              <p><br/> 
+                <strong>From:</strong> {message.fromUser.username}
+              </p>
+              <p>{message.content}</p>
+              <p>
+                <strong>To:</strong> {message.post.author.username}
+              </p> 
+            </li>
+            ))}
+          </ul>
+          <EditPost userToken={userToken} sessionUserToken={sessionUserToken} />
+        </div>
       )}
     </>
   );
