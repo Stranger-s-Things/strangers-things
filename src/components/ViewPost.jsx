@@ -3,19 +3,18 @@
 // if you are arent the poster it should have the functionality to message the poster
 // IF you are the poster it should give you the option to edit or delete the post and view a list of all
 //  messages sent to you for that post
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { fetchPosts, deletePost } from "../API/index.js";
 import EditPost from "./EditPost.jsx";
-import { postMessage } from "../API/index.js";
 import Message from "./Message.jsx";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchPosts, deletePost } from "../API/index.js";
 
 export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
-  const [posts, setPosts] = useState(null);
+  const [viewPost, setViewPost] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
   const [showMessageForm, setShowMessageForm] = useState(false);
   const postId = window.location.pathname.slice(7);
-  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function PostFetch() {
@@ -24,10 +23,10 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
           const data = await fetchPosts(
             userToken ? userToken : sessionUserToken
           );
-          return setPosts(data);
+          return setViewPost(data);
         } else {
           const data = await fetchPosts();
-          return setPosts(data);
+          return setViewPost(data);
         }
       } catch (error) {
         console.log(error);
@@ -38,6 +37,7 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
 
   async function handleDelete(postId) {
     await deletePost(postId, sessionUserToken);
+    navigate("/posts");
     console.log("post deleted");
   }
 
@@ -49,20 +49,14 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
     setShowMessageForm(true);
   }
 
-  async function handleMessage() {
-    await postMessage(postId, sessionUserToken, message);
-    console.log("send message");
-  }
-
   return (
-    <div>
-      <h1>View Post</h1>
-      <Link to="/posts" className="nav-link">
-        <p className="post-link-text">Back</p>
+    <div className="view-post-cont">
+      <Link to="/posts" className="nav-link view-post-link">
+        <h1 className="post-link-text">Back</h1>
       </Link>
 
-      {posts &&
-        posts.map((post) => {
+      {viewPost &&
+        viewPost.map((post) => {
           return (
             post._id === postId && (
               <div key={post._id} className="post-cont">
@@ -99,8 +93,9 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
                 </div>
                 <div className="post-link-cont">
                   {post.isAuthor && (
-                    <div>
+                    <div id="view-post-btns-cont">
                       <button
+                        className="view-post-btn"
                         onClick={() => {
                           handleEditClick();
                         }}
@@ -108,6 +103,7 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
                         Edit
                       </button>
                       <button
+                        className="view-post-btn"
                         onClick={() => {
                           handleDelete(postId);
                         }}
@@ -135,7 +131,7 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
                   {!post.isAuthor && !isLoggedIn && (
                     <div>
                       <Link to="/account/login" className="post-link">
-                        Login
+                        Login to message the seller
                       </Link>
                     </div>
                   )}

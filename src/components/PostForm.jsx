@@ -53,12 +53,6 @@ export default function PostForm({
 
   return (
     <>
-      {error && <h4>{error.message}</h4>}
-      {successMessage && (
-        <h4 id="success">
-          {successMessage} You are being redirected to your profile now.
-        </h4>
-      )}
       <div className="form-cont">
         <h1>Add New Post</h1>
         <form method="POST" onSubmit={handleSubmit} className="form">
@@ -109,6 +103,10 @@ export default function PostForm({
             <button id="post-form-btn">Create</button>
           </div>
         </form>
+        <div>
+          {error && <h4>{error.message}</h4>}
+          {successMessage && <h4 id="success">{successMessage}</h4>}
+        </div>
       </div>
     </>
   );
