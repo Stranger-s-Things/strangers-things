@@ -231,7 +231,36 @@ header nav {
   display: none;
 }
 /* ******************************************** */
+/* View Post.jsx */
+.view-post-cont {
+  margin: 1em 0;
+  padding: 1.3em 2em;
+}
 
+.view-post-link h1 {
+  margin-bottom: 1em;
+  font-size: 2.1em;
+}
+
+#view-post-btns-cont {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 2em;
+}
+
+.view-post-btn {
+  margin-top: 1em;
+  font-size: 1.6em;
+  background: none;
+  border: none;
+  color: #7b684a;
+}
+.view-post-btn:hover {
+  transition: all 0.4s;
+  cursor: pointer;
+  color: #5b4d30;
+}
+/* ******************************************** */
 /* Forms (login and register) */
 
 .form-cont {
