@@ -27,6 +27,7 @@ export default function App() {
       document.getElementById("main-cont").classList.remove("home-page");
     }
   }, [location.pathname]);
+
 useEffect(() => {
   console.log('isLoggedIn: ', isLoggedIn)
 }, 

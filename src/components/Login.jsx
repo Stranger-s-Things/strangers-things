@@ -81,6 +81,11 @@ export default function Login({ inputType, onSetInputType, onSetUserToken, onSet
           {successMessage} You are being redirected to your profile now.
         </h4>
       )}
+
+
+
+
+
     </div>
   );
 }

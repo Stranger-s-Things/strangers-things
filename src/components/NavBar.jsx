@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
+
   return (
     <header>
       <h1>Stranger&apos;s Things</h1>
@@ -13,6 +14,9 @@ export default function NavBar() {
         </Link>
         <Link to="./account/login" className="nav-link">
           Login
+        </Link>
+        <Link to="./account/login" className="nav-link">
+          Logout
         </Link>
       </nav>
     </header>
