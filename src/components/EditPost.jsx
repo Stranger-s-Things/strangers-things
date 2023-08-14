@@ -17,10 +17,9 @@ export default function EditPost({ userToken, sessionUserToken }) {
     e.preventDefault();
     setError(null);
     setSuccessMessage(null);
-
     const response = await editPost(
       postId,
-      sessionUserToken,
+      userToken ? userToken : sessionUserToken,
       title,
       description,
       price,
@@ -47,8 +46,6 @@ export default function EditPost({ userToken, sessionUserToken }) {
 
   return (
     <>
-      {error && <h4>{error.message}</h4>}
-      {successMessage && <h4 id="success">{successMessage}</h4>}
       <div className="form-cont">
         <h1>Edit Post</h1>
         <form method="PATCH" onSubmit={handleSubmit} className="form">
@@ -99,6 +96,10 @@ export default function EditPost({ userToken, sessionUserToken }) {
             <button id="post-form-btn">Update</button>
           </div>
         </form>
+        <div>
+          {error && <h4>{error.message}</h4>}
+          {successMessage && <h4 id="success">{successMessage}</h4>}
+        </div>
       </div>
     </>
   );
