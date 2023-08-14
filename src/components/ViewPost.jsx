@@ -9,30 +9,35 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchPosts, deletePost } from "../API/index.js";
 
-export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
-  const [viewPost, setViewPost] = useState(null);
+export default function ViewPost({
+  userToken,
+  sessionUserToken,
+  isLoggedIn,
+  sessionLoggedIn,
+}) {
+  const [posts, setPosts] = useState([]);
   const [showEditForm, setShowEditForm] = useState(false);
   const [showMessageForm, setShowMessageForm] = useState(false);
   const postId = window.location.pathname.slice(7);
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function PostFetch() {
+    async function PostsFetch() {
       try {
         if (userToken || sessionUserToken !== "null") {
           const data = await fetchPosts(
             userToken ? userToken : sessionUserToken
           );
-          return setViewPost(data);
+          return setPosts(data);
         } else {
           const data = await fetchPosts();
-          return setViewPost(data);
+          return setPosts(data);
         }
       } catch (error) {
         console.log(error);
       }
     }
-    PostFetch();
+    PostsFetch();
   }, [userToken, sessionUserToken, isLoggedIn]);
 
   async function handleDelete(postId) {
@@ -42,12 +47,22 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
   }
 
   function handleEditClick() {
-    setShowEditForm(true);
+    setShowEditForm(!showEditForm);
   }
 
   function handleMessageClick() {
-    setShowMessageForm(true);
+    setShowMessageForm(!showMessageForm);
   }
+
+  function filterPosts() {
+    return posts.filter((post) => post._id === postId);
+  }
+
+  console.log(
+    posts.map((post) => {
+      return post._id === postId && post.isAuthor;
+    })
+  );
 
   return (
     <div className="view-post-cont">
@@ -55,8 +70,8 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
         <h1 className="post-link-text">Back</h1>
       </Link>
 
-      {viewPost &&
-        viewPost.map((post) => {
+      {posts &&
+        posts.map((post) => {
           return (
             post._id === postId && (
               <div key={post._id} className="post-cont">
@@ -112,7 +127,7 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
                       </button>
                     </div>
                   )}
-                  {!post.isAuthor && isLoggedIn && (
+                  {!post.isAuthor && sessionLoggedIn === "true" && (
                     <p>
                       {/* Route to ViewPost.jsx to build out the individual post view for messaging the poster*/}
                       <Link
@@ -128,7 +143,7 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
                   )}
                 </div>
                 <div className="post-link-cont">
-                  {!post.isAuthor && !isLoggedIn && (
+                  {!post.isAuthor && sessionLoggedIn === "false" && (
                     <div>
                       <Link to="/account/login" className="post-link">
                         Login to message the seller
@@ -146,6 +161,40 @@ export default function ViewPost({ userToken, sessionUserToken, isLoggedIn }) {
       {showMessageForm && (
         <Message userToken={userToken} sessionUserToken={sessionUserToken} />
       )}
+      <div>
+        {posts &&
+          posts.map((post) => {
+            return (
+              post._id === postId &&
+              post.isAuthor && (
+                <h2 key={post._id} className="sub-titling">
+                  Messages regarding this post:{" "}
+                </h2>
+              )
+            );
+          })}
+
+        {posts &&
+          posts.map((post) => {
+            return (
+              post._id === postId &&
+              post.isAuthor && (
+                <div key={post._id}>
+                  {post.messages.map((message) => {
+                    return (
+                      <div key={message._id} className="post-cont">
+                        <h3>From: {message.fromUser.username}</h3>
+                        <p className="post-delivery">
+                          Message: {message.content}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              )
+            );
+          })}
+      </div>
     </div>
   );
 }

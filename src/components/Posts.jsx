@@ -94,7 +94,12 @@ export default function Posts({ userToken, sessionUserToken }) {
         </h3>
       </div>
 
-      <SearchBar query={query} onSetQuery={setQuery} posts={posts} />
+      <SearchBar
+        query={query}
+        onSetQuery={setQuery}
+        posts={posts}
+        id="search-bar"
+      />
       <section id="posts">
         {query.search === ""
           ? handleMapping(posts)
