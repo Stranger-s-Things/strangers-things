@@ -19,7 +19,8 @@ export default function ViewPost({
   const [posts, setPosts] = useState([]);
   const [showEditForm, setShowEditForm] = useState(false);
   const [showMessageForm, setShowMessageForm] = useState(false);
-  const postId = window.location.pathname.slice(7);
+
+  let { postId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,12 +55,6 @@ export default function ViewPost({
   function handleMessageClick() {
     setShowMessageForm(!showMessageForm);
   }
-
-  console.log(
-    posts.map((post) => {
-      return post._id === postId && post.isAuthor;
-    })
-  );
 
   return (
     <div className="view-post-cont">
@@ -143,7 +138,7 @@ export default function ViewPost({
                   {!post.isAuthor && sessionActiveUsername === "none" && (
                     <div>
                       <Link to="/account/login" className="post-link">
-                        Log In to message the seller
+                        Log in to message the seller
                       </Link>
                     </div>
                   )}
