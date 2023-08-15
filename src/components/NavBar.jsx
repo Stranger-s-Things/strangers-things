@@ -39,7 +39,6 @@ export default function NavBar({
     sessionStorage.setItem("userToken", null);
     sessionStorage.setItem("activeUsername", "none");
   }
-  console.log(sessionLoggedIn);
 
   return (
     <header>
