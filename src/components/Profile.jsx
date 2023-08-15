@@ -9,8 +9,6 @@ export default function Profile({
   sessionLoggedIn,
 }) {
   const [activeUser, setActiveUser] = useState(null);
-  const [sentMessages, setSentMessages] = useState([]);
-  const [recievedMessages, setrecievedMessages] = useState([]);
 
   const navigate = useNavigate();
 

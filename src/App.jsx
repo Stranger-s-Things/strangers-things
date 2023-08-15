@@ -77,6 +77,7 @@ export default function App() {
                 userToken={userToken}
                 sessionUserToken={sessionUserToken}
                 sessionLoggedIn={sessionLoggedIn}
+                sessionActiveUsername={sessionActiveUsername}
                 isLoggedIn={isLoggedIn}
               />
             }

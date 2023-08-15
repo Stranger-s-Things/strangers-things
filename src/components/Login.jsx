@@ -88,11 +88,6 @@ export default function Login({
           {successMessage} You are being redirected to your profile now.
         </h4>
       )}
-
-
-
-
-
     </div>
   );
 }

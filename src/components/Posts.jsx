@@ -105,6 +105,7 @@ export default function Posts({ userToken, sessionUserToken }) {
           ? handleMapping(posts)
           : handleMapping(query.results)}
       </section>
+      {err && <h3>{err}</h3>}
     </div>
   );
 }

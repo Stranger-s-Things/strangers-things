@@ -6,7 +6,7 @@
 import EditPost from "./EditPost.jsx";
 import Message from "./Message.jsx";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchPosts, deletePost } from "../API/index.js";
 
 export default function ViewPost({
@@ -14,6 +14,7 @@ export default function ViewPost({
   sessionUserToken,
   isLoggedIn,
   sessionLoggedIn,
+  sessionActiveUsername,
 }) {
   const [posts, setPosts] = useState([]);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -52,10 +53,6 @@ export default function ViewPost({
 
   function handleMessageClick() {
     setShowMessageForm(!showMessageForm);
-  }
-
-  function filterPosts() {
-    return posts.filter((post) => post._id === postId);
   }
 
   console.log(
@@ -115,7 +112,7 @@ export default function ViewPost({
                           handleEditClick();
                         }}
                       >
-                        Edit
+                        {showEditForm ? "Close" : "Edit"}
                       </button>
                       <button
                         className="view-post-btn"
@@ -137,16 +134,16 @@ export default function ViewPost({
                           handleMessageClick();
                         }}
                       >
-                        Message
+                        {showMessageForm ? "Close" : "Message"}
                       </Link>
                     </p>
                   )}
                 </div>
                 <div className="post-link-cont">
-                  {!post.isAuthor && sessionLoggedIn === "false" && (
+                  {!post.isAuthor && sessionActiveUsername === "none" && (
                     <div>
                       <Link to="/account/login" className="post-link">
-                        Login to message the seller
+                        Log In to message the seller
                       </Link>
                     </div>
                   )}
